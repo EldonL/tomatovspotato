@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerBulletPoolInstance : MonoBehaviour
 {
     public static PlayerBulletPoolInstance Instance;
-    public List<GameObject> pooledObjects;
-    [SerializeField]private GameObject _objectToPool;
+    public List<Bullet> pooledObjects;
+    [SerializeField]private Bullet _objectToPool;
     private int _amountToPool =40;
 
     private void Awake()
@@ -17,21 +17,21 @@ public class PlayerBulletPoolInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pooledObjects = new List<GameObject>();
-        GameObject tmp;
+        pooledObjects = new List<Bullet>();
+        Bullet tmp;
         for(int i =0; i<_amountToPool; i++)
         {
             tmp = Instantiate(_objectToPool);
-            tmp.SetActive(false);
+            tmp.gameObject.SetActive(false);
             pooledObjects.Add(tmp);
         }
     }
 
-    public GameObject GetPooledObject()
+    public Bullet GetPooledObject()
     {
         for(int i =0; i<_amountToPool; i++)
         {
-            if(!pooledObjects[i].activeInHierarchy)
+            if(!pooledObjects[i].gameObject.activeInHierarchy)
             {
                 return pooledObjects[i];
             }

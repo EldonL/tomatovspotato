@@ -6,8 +6,8 @@ public class Bullet : MonoBehaviour
 {
 
     private float speed = 10.0f;
-    public WaitForSeconds timeToStayEnabled = new WaitForSeconds(3.0f);
-
+    public WaitForSeconds timeToStayEnabled = new WaitForSeconds(1.3f);
+    public GameManager.PlayerType playerType;
     private void OnEnable()
     {
         StartCoroutine(EnabledBullet());
@@ -36,6 +36,7 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag=="enemy")
         {
             gameObject.SetActive(false);
+            ScoreManager.Instance.AddScore(playerType, 100);
         }
 
     }

@@ -8,18 +8,21 @@ public class Player : MonoBehaviour
     private Camera _camera;
     private float _timer = 0.0f;
     private float _timerToReloadBullet = 0.2f;
+    [SerializeField] private GameManager.PlayerType playerType;
+
     public void Start()
     {
         _camera = Camera.main;
     }
     public void Shoot()
     {
-        GameObject bullet = PlayerBulletPoolInstance.Instance.GetPooledObject();
+        Bullet bullet = PlayerBulletPoolInstance.Instance.GetPooledObject();
         if(bullet != null)
         {
+            bullet.playerType = playerType;
             bullet.transform.position = transform.position;
             bullet.transform.rotation = transform.rotation;
-            bullet.SetActive(true);
+            bullet.gameObject.SetActive(true);
         }
     }
 
@@ -41,6 +44,22 @@ public class Player : MonoBehaviour
         {
             Vector3 moveToMouse = new Vector3(_camera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, moveToMouse, 5.0f * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag=="CoinA")
+        {
+            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
+        }
+        else if(collision.gameObject.tag == "CoinB")
+        {
+            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
+        }
+        else if(collision.gameObject.tag =="CoinC")
+        {
+            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
         }
     }
 }
