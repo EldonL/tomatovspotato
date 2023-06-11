@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6446036907790007988}
   - component: {fileID: 6446036907790007989}
   m_Layer: 0
-  m_Name: CoinB
+  m_Name: CoinC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: d9c66f7849c970e4c8d3447141d6d291, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
