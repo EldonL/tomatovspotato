@@ -24,6 +24,10 @@ public class ScoreManager : MonoBehaviour
         
     }
 
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
     public void AddCoin(GameManager.PlayerType playerType, int coins)
     {
         switch(playerType)

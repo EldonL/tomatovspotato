@@ -8,6 +8,8 @@ TagManager:
   - CoinA
   - CoinB
   - CoinC
+  - coinPointA
+  - coinPointB
   layers:
   - Default
   - TransparentFX

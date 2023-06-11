@@ -11,7 +11,10 @@ public class PlayerBulletPoolInstance : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     // Start is called before the first frame update
@@ -37,5 +40,10 @@ public class PlayerBulletPoolInstance : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }
