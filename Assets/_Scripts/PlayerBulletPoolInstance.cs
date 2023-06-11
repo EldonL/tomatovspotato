@@ -7,7 +7,7 @@ public class PlayerBulletPoolInstance : MonoBehaviour
     public static PlayerBulletPoolInstance Instance;
     public List<GameObject> pooledObjects;
     [SerializeField]private GameObject _objectToPool;
-    private int _amountToPool =20;
+    private int _amountToPool =40;
 
     private void Awake()
     {
