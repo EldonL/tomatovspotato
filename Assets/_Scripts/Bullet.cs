@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag=="enemy")
         {
             gameObject.SetActive(false);
-            ScoreManager.Instance.AddScore(playerType, 100);
+            ScoreManager.Instance.AddScore(playerType, collision.gameObject.GetComponent<Enemy>().Score);
         }
 
     }

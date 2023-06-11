@@ -53,13 +53,17 @@ public class Player : MonoBehaviour
         {
             ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
         }
-        else if(collision.gameObject.tag == "CoinB")
+        if(collision.gameObject.tag == "CoinB")
         {
             ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
         }
-        else if(collision.gameObject.tag =="CoinC")
+        if(collision.gameObject.tag =="CoinC")
         {
             ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
+        }
+        if (collision.gameObject.tag == "enemy")
+        {
+            ScoreManager.Instance.MinusLives(playerType, 1);
         }
     }
 }
