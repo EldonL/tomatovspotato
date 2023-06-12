@@ -11,6 +11,7 @@ TagManager:
   - coinPointA
   - coinPointB
   - PlayerBullet
+  - backgroundendpoint
   layers:
   - Default
   - TransparentFX
