@@ -24,6 +24,7 @@ public class WhatYouHaveMenu : MonoBehaviour
         _quitButton.onClick.AddListener(OnQuitClick);
         _storeButton.onClick.AddListener(OnStoreClick);
         _selectButton.onClick.AddListener(OnSelectClick);
+        BuyMenu.OnCloseClicked += BuyMenuClose;
         _root.SetActive(false);
     }
 
@@ -34,6 +35,7 @@ public class WhatYouHaveMenu : MonoBehaviour
         _quitButton.onClick.RemoveAllListeners();
         _storeButton.onClick.RemoveAllListeners();
         _selectButton.onClick.RemoveAllListeners();
+        BuyMenu.OnCloseClicked -= BuyMenuClose;
     }
 
     private void PauseButtonPressed()
@@ -63,5 +65,10 @@ public class WhatYouHaveMenu : MonoBehaviour
     private void OnSelectClick()
     {
 
+    }
+
+    private void BuyMenuClose()
+    {
+        _root.SetActive(true);
     }
 }

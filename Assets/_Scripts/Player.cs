@@ -9,10 +9,23 @@ public class Player : MonoBehaviour
     private float _timer = 0.0f;
     private float _timerToReloadBullet = 0.2f;
     [SerializeField] private GameManager.PlayerType playerType;
+    [SerializeField] private GameObject _root;
+
+    private void Awake()
+    {
+        CanvasUI.OnClicked += CanvasUIPause;
+        WhatYouHaveMenu.OnCloseClicked+= WhatYouHaveMenuClose;
+    }
 
     public void Start()
     {
         _camera = Camera.main;
+    }
+
+    private void OnDestroy()
+    {
+        CanvasUI.OnClicked -= CanvasUIPause;
+        WhatYouHaveMenu.OnCloseClicked -= WhatYouHaveMenuClose;
     }
     public void Shoot()
     {
@@ -65,5 +78,15 @@ public class Player : MonoBehaviour
         {
             ScoreManager.Instance.MinusLives(playerType, 1);
         }
+    }
+
+    private void CanvasUIPause()
+    {
+        _root.SetActive(false);
+    }
+
+    private void WhatYouHaveMenuClose()
+    {
+        _root.SetActive(true);
     }
 }

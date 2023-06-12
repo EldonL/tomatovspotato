@@ -1721,6 +1721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _root: {fileID: 478519263}
+  _closeButton: {fileID: 1104963374}
+  _buyButton: {fileID: 1330213470}
 --- !u!1 &424878696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,7 +3985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.51, y: 7.56}
+  m_AnchoredPosition: {x: 8.51, y: 8.09}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1104963374
@@ -7739,6 +7741,10 @@ PrefabInstance:
       value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -7784,6 +7790,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5945521194276924484, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945521194522637146, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945521194780641254, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945521195925423530, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780218775497367277, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
