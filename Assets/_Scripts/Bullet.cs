@@ -8,11 +8,21 @@ public class Bullet : MonoBehaviour
     private float speed = 10.0f;
     public WaitForSeconds timeToStayEnabled = new WaitForSeconds(1.3f);
     public GameManager.PlayerType playerType;
+    public SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
+    }
     private void OnEnable()
     {
         StartCoroutine(EnabledBullet());
     }
 
+    private void OnDestroy()
+    {
+        WhatYouHaveMenu.OnSelectClicked -= WhatYouHaveMenuSelectClick;
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,5 +49,10 @@ public class Bullet : MonoBehaviour
             ScoreManager.Instance.AddScore(playerType, collision.gameObject.GetComponent<Enemy>().Score);
         }
 
+    }
+
+    private void WhatYouHaveMenuSelectClick()
+    {
+        spriteRenderer.sprite = WhatYouHaveMenu.Instance.SpriteForBullet;
     }
 }
