@@ -6,7 +6,8 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
 {
 
     public static EnemyCannonSpawnerInstance Instance;
-    [SerializeField] private List<EnemyBase> enemiesList = new List<EnemyBase>();
+    [SerializeField] private List<EnemyBase> enemiesList2 = new List<EnemyBase>();
+    [SerializeField] private List<EnemyBase> enemiesList3 = new List<EnemyBase>();
 
     private void Awake()
     {
@@ -15,16 +16,22 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
         else
             Destroy(gameObject);
 
-        foreach (var enemies in enemiesList)
+        foreach (var enemies in enemiesList2)
+        {
+            enemies.gameObject.SetActive(false);
+        } 
+        foreach (var enemies in enemiesList3)
         {
             enemies.gameObject.SetActive(false);
         }
         ScoreManager.LevelIncreaseEvent += Level2;
+        ScoreManager.LevelIncreaseEvent += Level3;
     }
 
     private void OnDestroy()
     {
         ScoreManager.LevelIncreaseEvent -= Level2;
+        ScoreManager.LevelIncreaseEvent -= Level3;
         Instance = null;
     }
 
@@ -33,7 +40,7 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
         if (ScoreManager.Instance.LevelInt==2)
         {
             ScoreManager.LevelIncreaseEvent -= Level2;
-            foreach (var enemies in enemiesList)
+            foreach (var enemies in enemiesList2)
             {
                 enemies.gameObject.SetActive(true);
             }
@@ -47,12 +54,12 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
         while(true)
         {
             int numberOfEnemiesDisabled = 0;
-            foreach (var enemies in enemiesList)
+            foreach (var enemies in enemiesList2)
             {
                 if(!enemies.gameObject.activeInHierarchy)
                 {
                     numberOfEnemiesDisabled++;
-                    if(numberOfEnemiesDisabled==enemiesList.Count)
+                    if(numberOfEnemiesDisabled==enemiesList2.Count)
                     {
                         ScoreManager.Instance.AddLevel();
                         yield break;
@@ -66,4 +73,40 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
 
     }
 
+    private void Level3()
+    {
+        if (ScoreManager.Instance.LevelInt == 3)
+        {
+            ScoreManager.LevelIncreaseEvent -= Level3;
+            foreach (var enemies in enemiesList3)
+            {
+                enemies.gameObject.SetActive(true);
+            }
+            StartCoroutine(Level3Routine());
+        }
+    }
+
+    private IEnumerator Level3Routine()
+    {
+        while (true)
+        {
+            int numberOfEnemiesDisabled = 0;
+            foreach (var enemies in enemiesList3)
+            {
+                if (!enemies.gameObject.activeInHierarchy)
+                {
+                    numberOfEnemiesDisabled++;
+                    if (numberOfEnemiesDisabled == enemiesList3.Count)
+                    {
+                        ScoreManager.Instance.AddLevel();
+                        yield break;
+                    }
+                    yield return null;
+                }
+                yield return null;
+            }
+
+        }
+
+    }
 }
