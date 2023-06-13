@@ -10,11 +10,14 @@ public class Player : MonoBehaviour
     private float _timerToReloadBullet = 0.2f;
     [SerializeField] private GameManager.PlayerType playerType;
     [SerializeField] private GameObject _root;
+    [SerializeField] private SpriteRenderer arm;
+    [SerializeField] private SpriteRenderer hat;
 
     private void Awake()
     {
         CanvasUI.OnClicked += CanvasUIPause;
         WhatYouHaveMenu.OnCloseClicked+= WhatYouHaveMenuClose;
+        WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
     }
 
     public void Start()
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
     {
         CanvasUI.OnClicked -= CanvasUIPause;
         WhatYouHaveMenu.OnCloseClicked -= WhatYouHaveMenuClose;
+        WhatYouHaveMenu.OnSelectClicked -= WhatYouHaveMenuSelectClick;
     }
     public void Shoot()
     {
@@ -88,5 +92,11 @@ public class Player : MonoBehaviour
     private void WhatYouHaveMenuClose()
     {
         _root.SetActive(true);
+    }
+
+    private void WhatYouHaveMenuSelectClick()
+    {
+        arm.sprite = WhatYouHaveMenu.Instance.SpriteForBullet;
+        hat.sprite = WhatYouHaveMenu.Instance.SpriteForHat;
     }
 }

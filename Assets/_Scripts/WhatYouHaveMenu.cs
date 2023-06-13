@@ -21,6 +21,9 @@ public class WhatYouHaveMenu : MonoBehaviour
     private InventoryWeaponButton selectedWeaponButton; 
     public Sprite SpriteForBullet { get => _spriteForBullet; private set => _spriteForBullet = value; }
     private Sprite _spriteForBullet;
+    
+    public Sprite SpriteForHat { get => _spriteForHat; private set => _spriteForHat = value; }
+    private Sprite _spriteForHat;
 
     public delegate void ClickStoreAction();
     public static event ClickStoreAction OnStoreClicked;
@@ -96,6 +99,7 @@ public class WhatYouHaveMenu : MonoBehaviour
     private void OnSelectClick()
     {
         _spriteForBullet = selectedWeaponButton.spriteWeapon;
+        _spriteForHat = selectedWeaponButton._image.sprite;
         _selectButton.interactable = false;
         OnSelectClicked?.Invoke();
     }
