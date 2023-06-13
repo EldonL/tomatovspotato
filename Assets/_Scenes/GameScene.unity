@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 98040065}
   - component: {fileID: 98040067}
   - component: {fileID: 98040068}
+  - component: {fileID: 98040069}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -263,6 +264,20 @@ MonoBehaviour:
   _objectToPoolA: {fileID: 860948653600105086, guid: 2f29fb179940e0a4eb9e6da369ba0ba3, type: 3}
   _objectToPoolB: {fileID: 860948653600105086, guid: 2f29fb179940e0a4eb9e6da369ba0ba3, type: 3}
   _objectToPoolC: {fileID: 860948653600105086, guid: 2f29fb179940e0a4eb9e6da369ba0ba3, type: 3}
+--- !u!114 &98040069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98040064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6513f01d20a476d49b4fb4e20e41c947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjectsA: []
+  _objectToPoolA: {fileID: 8533332096699873326, guid: 4a0ef18d50706a64e918cc0ddb371f3d, type: 3}
 --- !u!1 &258500875
 GameObject:
   m_ObjectHideFlags: 0

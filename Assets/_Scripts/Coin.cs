@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     private float speed = 5.0f;
     private void OnEnable()
     {
-        StartCoroutine(EnabledCoin());
+        StartCoroutine(EnabledObject());
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class Coin : MonoBehaviour
         }
     }
 
-    private IEnumerator EnabledCoin()
+    private IEnumerator EnabledObject()
     {
         if (gameObject.activeInHierarchy)
         {
