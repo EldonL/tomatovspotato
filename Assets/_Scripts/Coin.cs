@@ -23,6 +23,11 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag=="Player")
         {
+            GameObject coinText = CoinPoolInstance.Instance.GetPooledCoinText();
+            coinText.transform.position = transform.position;
+            coinText.transform.rotation = transform.rotation;
+            coinText.GetComponent<CoinText>().Text = coins.ToString();
+            coinText.gameObject.SetActive(true);
             //spawn coin number
             gameObject.SetActive(false);
         }

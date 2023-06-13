@@ -10,11 +10,15 @@ public class CoinPoolInstance : MonoBehaviour
     public List<GameObject> pooledObjectsA;
     public List<GameObject> pooledObjectsB;
     public List<GameObject> pooledObjectsC;
+    public List<GameObject> pooledCoinText;
     [SerializeField] private GameObject _objectToPoolA;
     [SerializeField] private GameObject _objectToPoolB;
     [SerializeField] private GameObject _objectToPoolC;
+    [SerializeField] private GameObject _objectCoinText;
     private int _amountToPool = 5;
+    private int _amountToPoolCoinText = 3;
 
+    private GameObject _canvasUI;
     public enum coinType
     {
         coinA,
@@ -27,6 +31,8 @@ public class CoinPoolInstance : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        _canvasUI = FindObjectOfType<CanvasUI>().gameObject;
     }
 
     // Start is called before the first frame update
@@ -35,9 +41,11 @@ public class CoinPoolInstance : MonoBehaviour
         pooledObjectsA = new List<GameObject>();
         pooledObjectsB = new List<GameObject>();
         pooledObjectsC = new List<GameObject>();
+        pooledCoinText = new List<GameObject>();
         GameObject tmpA;
         GameObject tmpB;
         GameObject tmpC;
+        GameObject tmpCoinText;
         for (int i = 0; i < _amountToPool; i++)
         {
             tmpA = Instantiate(_objectToPoolA);
@@ -55,6 +63,12 @@ public class CoinPoolInstance : MonoBehaviour
             tmpC = Instantiate(_objectToPoolC);
             tmpC.gameObject.SetActive(false);
             pooledObjectsC.Add(tmpC);
+        }
+        for (int i = 0; i < _amountToPoolCoinText; i++)
+        {
+            tmpCoinText = Instantiate(_objectCoinText,_canvasUI.transform);
+            tmpCoinText.gameObject.SetActive(false);
+            pooledCoinText.Add(tmpCoinText);
         }
     }
 
@@ -89,6 +103,18 @@ public class CoinPoolInstance : MonoBehaviour
             if (!pooledObjectsC[i].gameObject.activeInHierarchy)
             {
                 return pooledObjectsC[i];
+            }
+        }
+        return null;
+    }
+    
+    public GameObject GetPooledCoinText()
+    {
+        for (int i = 0; i < _amountToPoolCoinText; i++)
+        {
+            if (!pooledCoinText[i].gameObject.activeInHierarchy)
+            {
+                return pooledCoinText[i];
             }
         }
         return null;
