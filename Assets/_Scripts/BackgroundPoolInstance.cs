@@ -15,21 +15,23 @@ public class BackgroundPoolInstance : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-        EnemyPoolInstance.EnemyASpawnedEvent += BackGroundToUse;
+        ScoreManager.LevelIncreaseEvent += BackGroundToUse;
     }
 
     private void OnDestroy()
     {
-        EnemyPoolInstance.EnemyASpawnedEvent -= BackGroundToUse;
+        ScoreManager.LevelIncreaseEvent -= BackGroundToUse;
         Instance = null;
     }
 
     private void BackGroundToUse()
     {
-        spriteIndex++;
+
         if (spriteRenderer.Count < spriteIndex)
             spriteIndex = 0;
-        foreach(var bg in background)
+        else
+            spriteIndex++;
+        foreach (var bg in background)
         {
             bg.spriteRenderer.sprite = spriteRenderer[spriteIndex];
         }

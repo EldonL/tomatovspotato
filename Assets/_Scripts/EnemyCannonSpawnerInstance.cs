@@ -19,21 +19,51 @@ public class EnemyCannonSpawnerInstance : MonoBehaviour
         {
             enemies.gameObject.SetActive(false);
         }
-        EnemyPoolInstance.EnemyASpawnedEvent += Level2;
+        ScoreManager.LevelIncreaseEvent += Level2;
     }
 
     private void OnDestroy()
     {
-        EnemyPoolInstance.EnemyASpawnedEvent -= Level2;
+        ScoreManager.LevelIncreaseEvent -= Level2;
         Instance = null;
     }
 
     private void Level2()
     {
-        foreach (var enemies in enemiesList)
+        if (ScoreManager.Instance.LevelInt==2)
         {
-            enemies.gameObject.SetActive(true);
+            ScoreManager.LevelIncreaseEvent -= Level2;
+            foreach (var enemies in enemiesList)
+            {
+                enemies.gameObject.SetActive(true);
+            }
+            StartCoroutine(Level2Routine());
         }
+
+    }
+
+    private IEnumerator Level2Routine()
+    {
+        while(true)
+        {
+            int numberOfEnemiesDisabled = 0;
+            foreach (var enemies in enemiesList)
+            {
+                if(!enemies.gameObject.activeInHierarchy)
+                {
+                    numberOfEnemiesDisabled++;
+                    if(numberOfEnemiesDisabled==enemiesList.Count)
+                    {
+                        ScoreManager.Instance.AddLevel();
+                        yield break;
+                    }
+                    yield return null;
+                }
+                yield return null;
+            }
+
+        }
+
     }
 
 }

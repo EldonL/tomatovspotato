@@ -8,10 +8,14 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private PlayerScores player1;
     [SerializeField] private PlayerScores player2;
     [SerializeField] private TextMeshProUGUI levelText;
+    public int LevelInt { get => levelInt; private set => levelInt = value; }
     private int levelInt;
 
     public delegate void ScoreManagerAction();
     public static event ScoreManagerAction NoLivesEvent;
+
+    public delegate void ScoreManagerLevelIncreaseAction();
+    public static event ScoreManagerLevelIncreaseAction LevelIncreaseEvent;
 
     private void Awake()
     {
@@ -20,7 +24,7 @@ public class ScoreManager : MonoBehaviour
         else
             Destroy(gameObject);
         AddLevel();
-        EnemyPoolInstance.EnemyASpawnedEvent +=AddLevel;
+
     }
 
     private void Start()
@@ -30,14 +34,15 @@ public class ScoreManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        EnemyPoolInstance.EnemyASpawnedEvent -= AddLevel;
+
         Instance = null;
     }
 
-    private void AddLevel()
+    public void AddLevel()
     {
         levelInt += 1;
         levelText.text = levelInt.ToString();
+        LevelIncreaseEvent?.Invoke();
     }
 
     public void AddCoin(GameManager.PlayerType playerType, int coins)

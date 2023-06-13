@@ -16,9 +16,7 @@ public class EnemyPoolInstance : MonoBehaviour
 
     private int numberOfEnemyASpawned;
     private int numberOfEnemyAToSpawn =5;
-    public delegate void EnemyASpawnedAction();
-    public static event EnemyASpawnedAction EnemyASpawnedEvent;
-    private bool enemyASpawnedEventInvoked = false;
+    private bool enemyASpawnedDone = false;
     public enum enemyType
     {
         enemyA,
@@ -70,10 +68,10 @@ public class EnemyPoolInstance : MonoBehaviour
             if (!pooledObjectsA[i].gameObject.activeInHierarchy)
             {
                 numberOfEnemyASpawned++;
-                if (numberOfEnemyASpawned > numberOfEnemyAToSpawn && !enemyASpawnedEventInvoked)
+                if (numberOfEnemyASpawned > numberOfEnemyAToSpawn && !enemyASpawnedDone)
                 {
-                    EnemyASpawnedEvent?.Invoke();
-                    enemyASpawnedEventInvoked = true;
+                    ScoreManager.Instance.AddLevel();
+                    enemyASpawnedDone = true;
                 }
                 return pooledObjectsA[i];
             }
