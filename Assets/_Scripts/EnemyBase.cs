@@ -9,7 +9,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private int score = 100;
     public WaitForSeconds timeToStayEnabled = new WaitForSeconds(3.0f);
     [SerializeField] private int defaultLife = 1;
-    [SerializeField] private int currentLife;
+    private int currentLife;
 
     protected virtual void Awake()
     {

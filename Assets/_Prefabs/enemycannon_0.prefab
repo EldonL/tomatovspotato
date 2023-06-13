@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 502889836, guid: 3d022ac20ff207e4db920701f83936be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -202,5 +202,4 @@ MonoBehaviour:
   speed: 0
   score: 500
   defaultLife: 10
-  currentLife: 0
   bombTransform: {fileID: 2968898845891904202}
