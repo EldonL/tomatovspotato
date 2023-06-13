@@ -18,7 +18,7 @@ public class CanvasUI : MonoBehaviour
 
     private void Start()
     {
-        countDownText.text = "3";
+        countDownText.text = "Ready";
         StartCoroutine(CountDownRoutine());
     }
 
@@ -31,9 +31,7 @@ public class CanvasUI : MonoBehaviour
     private IEnumerator CountDownRoutine()
     {
         yield return new WaitForSeconds(1.0f);
-        countDownText.text = "2";
-        yield return new WaitForSeconds(1.0f);
-        countDownText.text = "1";
+        countDownText.text = "Set";
         yield return new WaitForSeconds(1.0f);
         countDownText.text = "GO";
         yield return new WaitForSeconds(0.2f);

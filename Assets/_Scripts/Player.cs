@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 moveToMouse = new Vector3(_camera.ScreenToWorldPoint(Input.mousePosition).x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, moveToMouse, 5.0f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, moveToMouse, 10.0f * Time.deltaTime);
         }
     }
 

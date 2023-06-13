@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private PlayerScores player2;
 
 
+    public delegate void ScoreManagerAction();
+    public static event ScoreManagerAction NoLivesEvent;
 
     private void Awake()
     {
@@ -77,6 +79,17 @@ public class ScoreManager : MonoBehaviour
             case GameManager.PlayerType.p2:
                 player2.Lives -= lives;
                 break;
+        }
+        
+        // need to do a check if one player game
+        if(player1.Lives<=0)
+        {
+            NoLivesEvent?.Invoke();
+        }
+        // need to do a  check if two player game
+        if (player1.Lives<=0 && player2.Lives<=0)
+        {
+            NoLivesEvent?.Invoke();
         }
     }
 
