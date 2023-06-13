@@ -782,8 +782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -399.25998, y: -245.50998}
-  m_SizeDelta: {x: 1.9419, y: -2.0343}
+  m_AnchoredPosition: {x: -398.3911, y: -245.32}
+  m_SizeDelta: {x: 3.1976, y: -2.0343}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4334764614244925423
 CanvasRenderer:
@@ -840,8 +840,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.4
-  m_fontSizeBase: 0.4
+  m_fontSize: 0.75
+  m_fontSizeBase: 0.75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2066,6 +2066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 4334764615076189656}
   player2: {fileID: 4334764613405291266}
+  levelText: {fileID: 4334764614244925420}
 --- !u!1 &4334764615076189654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,8 +2153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400.49, y: -245.51}
-  m_SizeDelta: {x: 1.9419, y: -2.0343}
+  m_AnchoredPosition: {x: -401.32, y: -245.32}
+  m_SizeDelta: {x: 2.2816, y: -2.0343}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4334764615181505619
 CanvasRenderer:
@@ -2210,8 +2211,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.4
-  m_fontSizeBase: 0.4
+  m_fontSize: 0.75
+  m_fontSizeBase: 0.75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

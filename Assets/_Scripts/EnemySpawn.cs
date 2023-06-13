@@ -11,6 +11,7 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private Transform startLocationA;
     [SerializeField] private Transform startLocationB;
+
     void Start()
     {
         transform.DOMoveX(startLocationB.position.x, 2.0f);

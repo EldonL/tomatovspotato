@@ -5,7 +5,7 @@ using UnityEngine;
 public class Background : MonoBehaviour
 {
     [SerializeField] private float speed=6.0f;
-
+    public SpriteRenderer spriteRenderer; 
     private void Update()
     {
         transform.Translate(Vector3.down * speed * Time.deltaTime);

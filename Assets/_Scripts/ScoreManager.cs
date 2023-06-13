@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     [SerializeField] private PlayerScores player1;
     [SerializeField] private PlayerScores player2;
-
+    [SerializeField] private TextMeshProUGUI levelText;
+    private int levelInt;
 
     public delegate void ScoreManagerAction();
     public static event ScoreManagerAction NoLivesEvent;
@@ -18,7 +19,8 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-
+        AddLevel();
+        EnemyPoolInstance.EnemyASpawnedEvent +=AddLevel;
     }
 
     private void Start()
@@ -28,8 +30,16 @@ public class ScoreManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        EnemyPoolInstance.EnemyASpawnedEvent -= AddLevel;
         Instance = null;
     }
+
+    private void AddLevel()
+    {
+        levelInt += 1;
+        levelText.text = levelInt.ToString();
+    }
+
     public void AddCoin(GameManager.PlayerType playerType, int coins)
     {
         switch(playerType)

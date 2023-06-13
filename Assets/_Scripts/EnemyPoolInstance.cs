@@ -14,6 +14,11 @@ public class EnemyPoolInstance : MonoBehaviour
     [SerializeField] private GameObject _objectToPoolC;
     private int _amountToPool = 40;
 
+    private int numberOfEnemyASpawned;
+    private int numberOfEnemyAToSpawn =5;
+    public delegate void EnemyASpawnedAction();
+    public static event EnemyASpawnedAction EnemyASpawnedEvent;
+    private bool enemyASpawnedEventInvoked = false;
     public enum enemyType
     {
         enemyA,
@@ -64,6 +69,12 @@ public class EnemyPoolInstance : MonoBehaviour
         {
             if (!pooledObjectsA[i].gameObject.activeInHierarchy)
             {
+                numberOfEnemyASpawned++;
+                if (numberOfEnemyASpawned > numberOfEnemyAToSpawn && !enemyASpawnedEventInvoked)
+                {
+                    EnemyASpawnedEvent?.Invoke();
+                    enemyASpawnedEventInvoked = true;
+                }
                 return pooledObjectsA[i];
             }
         }
