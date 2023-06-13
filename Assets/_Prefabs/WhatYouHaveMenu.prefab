@@ -1602,8 +1602,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408169086379754123, guid: e1fe9164beeb1a04e9b6ea14b6aeb804, type: 3}
       propertyPath: _description
-      value: Brrrr, it's cold. And you have icy cold powers. Shoot snow to slow them
-        down!
+      value: Brrrr, it's cold. And you have icy cold powers. It's blizzard time,
+        send those snowflakes towards the enemy!
       objectReference: {fileID: 0}
     - target: {fileID: 2408169086379754123, guid: e1fe9164beeb1a04e9b6ea14b6aeb804, type: 3}
       propertyPath: spriteWeapon
@@ -1732,8 +1732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408169086379754123, guid: e1fe9164beeb1a04e9b6ea14b6aeb804, type: 3}
       propertyPath: _description
-      value: You are a master chef. Shoot pans at your enemies and do double the
-        damage!
+      value: You are a master chef. Throw those pans and do double the damage!
       objectReference: {fileID: 0}
     - target: {fileID: 2408169086379754123, guid: e1fe9164beeb1a04e9b6ea14b6aeb804, type: 3}
       propertyPath: spriteWeapon
