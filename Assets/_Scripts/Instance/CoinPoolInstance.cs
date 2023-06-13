@@ -18,7 +18,7 @@ public class CoinPoolInstance : MonoBehaviour
     private int _amountToPool = 5;
     private int _amountToPoolCoinText = 3;
 
-    private GameObject _canvasUI;
+    [SerializeField] private GameObject coinTextSpawnAboveOtherUI;
     public enum coinType
     {
         coinA,
@@ -32,7 +32,7 @@ public class CoinPoolInstance : MonoBehaviour
         else
             Destroy(gameObject);
 
-        _canvasUI = FindObjectOfType<CanvasUI>().gameObject;
+
     }
 
     // Start is called before the first frame update
@@ -66,7 +66,7 @@ public class CoinPoolInstance : MonoBehaviour
         }
         for (int i = 0; i < _amountToPoolCoinText; i++)
         {
-            tmpCoinText = Instantiate(_objectCoinText,_canvasUI.transform);
+            tmpCoinText = Instantiate(_objectCoinText,coinTextSpawnAboveOtherUI.transform);
             tmpCoinText.gameObject.SetActive(false);
             pooledCoinText.Add(tmpCoinText);
         }

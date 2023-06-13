@@ -12,9 +12,10 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _root;
     [SerializeField] private SpriteRenderer arm;
     [SerializeField] private SpriteRenderer hat;
-
+    private Vector3 originalPosition; 
     private void Awake()
     {
+        originalPosition = gameObject.transform.position;
         CanvasUI.OnClicked += CanvasUIPause;
         WhatYouHaveMenu.OnCloseClicked+= WhatYouHaveMenuClose;
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
     public void Shoot()
     {
         Bullet bullet = PlayerBulletPoolInstance.Instance.GetPooledObject();
-        if(bullet != null)
+        if(bullet != null && _root.activeInHierarchy)
         {
             bullet.playerType = playerType;
             bullet.transform.position = transform.position;
@@ -81,7 +82,22 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "enemy")
         {
             ScoreManager.Instance.MinusLives(playerType, 1);
+            StartCoroutine(HitByEnemyRoutine());
         }
+    }
+
+    private IEnumerator HitByEnemyRoutine()
+    {
+        GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
+        explosion.transform.position = transform.position;
+        explosion.transform.position = transform.position;
+        explosion.SetActive(true);
+        _root.SetActive(false);
+        yield return new WaitForSeconds(0.75f);
+        gameObject.transform.position = originalPosition;
+        yield return new WaitForSeconds(0.75f);
+        _root.SetActive(true);
+        yield break;
     }
 
     private void CanvasUIPause()
