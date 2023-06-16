@@ -102,6 +102,9 @@ public class WhatYouHaveMenu : MonoBehaviour
         _spriteForHat = selectedWeaponButton._image.sprite;
         _selectButton.interactable = false;
         OnSelectClicked?.Invoke();
+        Time.timeScale = 1.0f;
+        _root.SetActive(false);
+        OnCloseClicked?.Invoke();
     }
 
     private void BuyMenuClose()
