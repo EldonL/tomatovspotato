@@ -856,6 +856,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5169556436920442497, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -2289,6 +2293,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5169556436920442497, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
       propertyPath: m_Name
       value: Player1
