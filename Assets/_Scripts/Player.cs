@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Player : MonoBehaviour
 {
 
@@ -12,13 +12,16 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _root;
     [SerializeField] private SpriteRenderer arm;
     [SerializeField] private SpriteRenderer hat;
-    private Vector3 originalPosition; 
+    private Vector3 originalPosition;
+
+    PhotonView view;
     private void Awake()
     {
         originalPosition = gameObject.transform.position;
         CanvasUI.OnClicked += CanvasUIPause;
         WhatYouHaveMenu.OnCloseClicked+= WhatYouHaveMenuClose;
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
+        view = GetComponent<PhotonView>();
     }
 
     public void Start()
@@ -46,13 +49,17 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        PlayerMovement();
-        _timer += Time.deltaTime;
-        if(_timer > _timerToReloadBullet)
+        if(view.IsMine)
         {
-            Shoot();
-            _timer = 0.0f;
+            PlayerMovement();
+            _timer += Time.deltaTime;
+            if (_timer > _timerToReloadBullet)
+            {
+                Shoot();
+                _timer = 0.0f;
+            }
         }
+        
 
     }
 
