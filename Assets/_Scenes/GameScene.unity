@@ -528,6 +528,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5814720648916875398, guid: 335a935a2223d2745b3ca9876b8c7571, type: 3}
   m_PrefabInstance: {fileID: 5814720648685322378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &407980682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407980683}
+  m_Layer: 0
+  m_Name: ClientSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407980683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407980682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.65, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1382852329}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424878696
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +656,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &495923077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 495923078}
+  m_Layer: 0
+  m_Name: MasterSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495923078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495923077}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.79, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1382852329}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +918,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 47133604}
     m_Modifications:
+    - target: {fileID: 653298031680977226, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4276565408856708611, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
       propertyPath: m_Name
       value: enemycannon_0
@@ -1537,6 +1603,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+  _masterSpawnTransform: {fileID: 495923078}
+  _clientSpawnTransform: {fileID: 407980683}
 --- !u!4 &1382852329
 Transform:
   m_ObjectHideFlags: 0
@@ -1548,7 +1616,9 @@ Transform:
   m_LocalPosition: {x: 0, y: -2.633, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 495923078}
+  - {fileID: 407980683}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1570,6 +1640,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 47133604}
     m_Modifications:
+    - target: {fileID: 653298031680977226, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4276565408856708611, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
       propertyPath: m_Name
       value: enemycannon_0 (2)
@@ -1627,6 +1701,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 47133604}
     m_Modifications:
+    - target: {fileID: 653298031680977226, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4276565408856708611, guid: afd5e893a9ce0864c9e6f6d090cdc4ac, type: 3}
       propertyPath: m_Name
       value: enemycannon_0 (1)
