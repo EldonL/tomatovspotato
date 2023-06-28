@@ -77,4 +77,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomPanel.SetActive(false);
         lobbyPanel.SetActive(true);
     }
+
+    public override void OnConnectedToMaster()
+    {
+        base.OnConnectedToMaster();
+        PhotonNetwork.JoinLobby();
+    }
 }
