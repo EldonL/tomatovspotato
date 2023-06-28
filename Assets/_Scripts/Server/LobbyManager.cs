@@ -61,4 +61,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void JoinRoom(string roomName)
+    {
+        PhotonNetwork.JoinRoom(roomName);
+    }
+
 }
