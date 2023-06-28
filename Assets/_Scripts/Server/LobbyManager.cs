@@ -12,6 +12,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject roomPanel;
     public TextMeshProUGUI roomName;
 
+    public RoomItem roomItemPrefab;
+    List<RoomItem> roomItemsList = new List<RoomItem>();
+    public Transform contentObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,28 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text = "Room name: " + PhotonNetwork.CurrentRoom.Name;
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        base.OnRoomListUpdate(roomList);
+        UpdateRoomList(roomList);
+    }
+
+    void UpdateRoomList(List<RoomInfo> list)
+    {
+        foreach(RoomItem item in roomItemsList)
+        {
+            Destroy(item.gameObject);
+        }
+        roomItemsList.Clear();
+
+        foreach(RoomInfo room in list)
+        {
+            RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
+            newRoom.SetRoomName(room.Name);
+            roomItemsList.Add(newRoom);
+        }
     }
 
 }
