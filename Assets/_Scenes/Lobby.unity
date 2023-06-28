@@ -2496,7 +2496,7 @@ MonoBehaviour:
   lobbyPanel: {fileID: 1189529880}
   roomPanel: {fileID: 188961559}
   roomName: {fileID: 785535675}
-  roomItemPrefab: {fileID: 1628712807710238260, guid: f468fe1613942fb49934d577b5b89e4a, type: 3}
+  roomItemPrefab: {fileID: 2311124892982482970, guid: f468fe1613942fb49934d577b5b89e4a, type: 3}
   contentObject: {fileID: 202861443}
 --- !u!4 &1880503173
 Transform:
