@@ -16,6 +16,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     List<RoomItem> roomItemsList = new List<RoomItem>();
     public Transform contentObject;
 
+    public float timeBetweenUpdates = 1.5f;
+    float nextUpdateTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +44,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+
         base.OnRoomListUpdate(roomList);
-        UpdateRoomList(roomList);
+        if (Time.time >= nextUpdateTime)
+        {
+            UpdateRoomList(roomList);
+            nextUpdateTime = Time.time + timeBetweenUpdates;
+        }
     }
 
     void UpdateRoomList(List<RoomInfo> list)
