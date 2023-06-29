@@ -34,7 +34,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2 });
+            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2, BroadcastPropsChangeToAll = true });
         }
     }
 
@@ -114,6 +114,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
             newPlayerItem.SetPlayerInfo(player.Value);
+            if(player.Value == PhotonNetwork.LocalPlayer)
+            {
+                newPlayerItem.ApplyLocalChanges();
+            }
             playerItemsList.Add(newPlayerItem);
         }
     }
