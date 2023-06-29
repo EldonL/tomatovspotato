@@ -12,6 +12,6 @@ public class SpawnPlayer : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.Instantiate(_playerPrefab.name, _masterSpawnTransform.position, _masterSpawnTransform.rotation);
         else
-            PhotonNetwork.Instantiate(_playerPrefab.name, _clientSpawnTransform.position, _masterSpawnTransform.rotation);
+            PhotonNetwork.Instantiate(_playerPrefab.name, _clientSpawnTransform.position, _clientSpawnTransform.rotation);
     }
 }
