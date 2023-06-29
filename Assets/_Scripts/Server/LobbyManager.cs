@@ -19,6 +19,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public float timeBetweenUpdates = 1.5f;
     float nextUpdateTime;
 
+    public List<PlayerItem> playerItemsList = new List<PlayerItem>();
+    public PlayerItem playerItemPrefab;
+    public Transform playerItemParent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +32,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickCreate()
     {
-        if(roomInputField.text.Length>=1)
+        if (roomInputField.text.Length >= 1)
         {
-            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2 }) ;
+            PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2 });
         }
     }
 
@@ -40,6 +44,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomName.text = "Room name: " + PhotonNetwork.CurrentRoom.Name;
+        UpdatePlayerList();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -55,13 +60,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void UpdateRoomList(List<RoomInfo> list)
     {
-        foreach(RoomItem item in roomItemsList)
+        foreach (RoomItem item in roomItemsList)
         {
             Destroy(item.gameObject);
         }
         roomItemsList.Clear();
 
-        foreach(RoomInfo room in list)
+        foreach (RoomInfo room in list)
         {
             RoomItem newRoom = Instantiate(roomItemPrefab, contentObject);
             newRoom.SetRoomName(room.Name);
@@ -90,5 +95,37 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
         PhotonNetwork.JoinLobby();
+    }
+
+    void UpdatePlayerList()
+    {
+        foreach (PlayerItem item in playerItemsList)//delete all current playerItems in the list
+        {
+            Destroy(item.gameObject);
+        }
+        playerItemsList.Clear();
+
+        if (PhotonNetwork.CurrentRoom == null)//if not in empty room
+        {
+            return;
+        }
+
+        foreach (KeyValuePair<int, Photon.Realtime.Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
+            playerItemsList.Add(newPlayerItem);
+        }
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        UpdatePlayerList();
     }
 }
