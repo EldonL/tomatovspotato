@@ -23,6 +23,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public PlayerItem playerItemPrefab;
     public Transform playerItemParent;
 
+    public GameObject playButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            playButton.SetActive(true);
+        }
+        else
+        {
+            playButton.SetActive(false);
+        }
+    }
     public void OnClickCreate()
     {
         if (roomInputField.text.Length >= 1)
@@ -132,5 +145,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerLeftRoom(otherPlayer);
         UpdatePlayerList();
+    }
+
+    public void OnClickPlayButton()
+    {
+        PhotonNetwork.LoadLevel("GameScene");
     }
 }
