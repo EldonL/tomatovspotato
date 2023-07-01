@@ -129,16 +129,28 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "enemy")
         {
             ScoreManager.Instance.MinusLives(playerType, 1);
-            StartCoroutine(HitByEnemyRoutine());
+
+            if (view.IsMine)
+            {
+                view.RPC("HitByEnemy", RpcTarget.All, player);
+            }
         }
     }
 
-    private IEnumerator HitByEnemyRoutine()
+
+
+    [PunRPC]
+    void HitByEnemy(Photon.Realtime.Player player)
     {
-        GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
-        explosion.transform.position = transform.position;
-        explosion.transform.position = transform.position;
-        explosion.SetActive(true);
+        StartCoroutine(HitByEnemyRoutine(player));
+    }
+
+    IEnumerator HitByEnemyRoutine(Photon.Realtime.Player player)
+    {
+        //GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
+        //explosion.transform.position = transform.position;
+        //explosion.transform.position = transform.position;
+        //explosion.SetActive(true);
         _root.SetActive(false);
         yield return new WaitForSeconds(0.75f);
         gameObject.transform.position = originalPosition;
@@ -146,6 +158,7 @@ public class Player : MonoBehaviour
         _root.SetActive(true);
         yield break;
     }
+
 
     private void CanvasUIPause()
     {
