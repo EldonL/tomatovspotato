@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 public class Player : MonoBehaviour
 {
 
@@ -10,16 +11,22 @@ public class Player : MonoBehaviour
     private float _timerToReloadBullet = 0.2f;
     [SerializeField] private GameManager.PlayerType playerType;
     [SerializeField] private GameObject _root;
+
+    [SerializeField] public Sprite[] bodySprites;
+    [SerializeField] public SpriteRenderer body;
     [SerializeField] private SpriteRenderer arm;
     [SerializeField] private SpriteRenderer hat;
+
     private Vector3 originalPosition;
 
     PhotonView view;
+    Photon.Realtime.Player player;
+
     private void Awake()
     {
         originalPosition = gameObject.transform.position;
         CanvasUI.OnClicked += CanvasUIPause;
-        WhatYouHaveMenu.OnCloseClicked+= WhatYouHaveMenuClose;
+        WhatYouHaveMenu.OnCloseClicked += WhatYouHaveMenuClose;
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
         view = GetComponent<PhotonView>();
     }
@@ -29,12 +36,59 @@ public class Player : MonoBehaviour
         _camera = Camera.main;
     }
 
+    public void Update()
+    {
+        if (view.IsMine)
+        {
+            PlayerMovement();
+            _timer += Time.deltaTime;
+            if (_timer > _timerToReloadBullet)
+            {
+                Shoot();
+                _timer = 0.0f;
+            }
+
+        }
+    }
+
     private void OnDestroy()
     {
         CanvasUI.OnClicked -= CanvasUIPause;
         WhatYouHaveMenu.OnCloseClicked -= WhatYouHaveMenuClose;
         WhatYouHaveMenu.OnSelectClicked -= WhatYouHaveMenuSelectClick;
     }
+
+    public void SetPlayerInfo(Photon.Realtime.Player _player)
+    {
+        player = _player;
+        UpdatePlayerItem(player);
+    }
+
+    private void UpdatePlayerItem(Photon.Realtime.Player player)
+    {
+        if (view.IsMine)
+        {
+            view.RPC("ChangeAvatar", RpcTarget.AllBuffered, player);
+        }
+
+    }
+
+    [PunRPC]
+    void ChangeAvatar(Photon.Realtime.Player player)
+    {
+        if (player.CustomProperties.ContainsKey("playerAvatar"))
+        {
+            body.sprite = bodySprites[(int)player.CustomProperties["playerAvatar"]];
+        }
+        else
+        {
+            body.sprite = bodySprites[0];
+        }
+    }
+
+
+
+
     public void Shoot()
     {
         Bullet bullet = PlayerBulletPoolInstance.Instance.GetPooledObject();
@@ -47,21 +101,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if(view.IsMine)
-        {
-            PlayerMovement();
-            _timer += Time.deltaTime;
-            if (_timer > _timerToReloadBullet)
-            {
-                Shoot();
-                _timer = 0.0f;
-            }
-        }
-        
 
-    }
 
     private void PlayerMovement()
     {

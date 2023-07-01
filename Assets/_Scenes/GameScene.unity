@@ -1603,6 +1603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 5945521194276924481, guid: 021508cbc01452e40ab078c9eef6bcef, type: 3}
+  _testPrefab: {fileID: 7796691737533727170, guid: 973770aaedffb594aab8feee15240c63, type: 3}
   _masterSpawnTransform: {fileID: 495923078}
   _clientSpawnTransform: {fileID: 407980683}
 --- !u!4 &1382852329
