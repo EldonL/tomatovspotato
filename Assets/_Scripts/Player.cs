@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] public SpriteRenderer body;
     [SerializeField] private SpriteRenderer arm;
     [SerializeField] private SpriteRenderer hat;
+    private BoxCollider2D playerBoxCollider2D;
 
     private Vector3 originalPosition;
 
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         WhatYouHaveMenu.OnCloseClicked += WhatYouHaveMenuClose;
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
         view = GetComponent<PhotonView>();
+        playerBoxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     public void Start()
@@ -152,10 +154,12 @@ public class Player : MonoBehaviour
         //explosion.transform.position = transform.position;
         //explosion.SetActive(true);
         _root.SetActive(false);
+        playerBoxCollider2D.enabled = false;
         yield return new WaitForSeconds(0.75f);
         gameObject.transform.position = originalPosition;
         yield return new WaitForSeconds(0.75f);
         _root.SetActive(true);
+        playerBoxCollider2D.enabled = true;
         yield break;
     }
 
