@@ -11,6 +11,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public GameObject roomPanel;
     public TextMeshProUGUI roomName;
+    public TextMeshProUGUI errorText;
 
     public RoomItem roomItemPrefab;
     List<RoomItem> roomItemsList = new List<RoomItem>();
@@ -25,11 +26,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public GameObject playButton;
 
+    private void Awake()
+    {
+        errorText.gameObject.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.JoinLobby();
         roomPanel.SetActive(false);
+        
     }
 
     private void Update()
@@ -48,6 +54,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (roomInputField.text.Length >= 1)
         {
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2, BroadcastPropsChangeToAll = true });
+        }
+        else
+        {
+            errorText.gameObject.SetActive(true);
+            errorText.text = "Enter a room name";
         }
     }
 
