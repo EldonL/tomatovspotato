@@ -8,8 +8,12 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_InputField _usernameInput;
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private TextMeshProUGUI errorText;
 
-
+    private void Awake()
+    {
+        errorText.gameObject.SetActive(false);
+    }
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -26,6 +30,13 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
         }
+        else
+        {
+            errorText.gameObject.SetActive(true);
+            errorText.text = "Enter name";
+        }
     }
+
+
 
 }
