@@ -55,6 +55,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (roomInputField.text.Length >= 1)
         {
             createButtonText.ButtonText = "Creating...";
+            createButtonText.PressButton = false;
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2, BroadcastPropsChangeToAll = true });
         }
         else

@@ -1593,6 +1593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 288660893}
+  connectButton: {fileID: 1151996798}
 --- !u!1 &1162733539
 GameObject:
   m_ObjectHideFlags: 0
