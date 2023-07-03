@@ -7,11 +7,12 @@ using TMPro;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField roomInputField;
-    public GameObject lobbyPanel;
-    public GameObject roomPanel;
-    public TextMeshProUGUI roomName;
-    public TextMeshProUGUI errorText;
+    [SerializeField] private TMP_InputField roomInputField;
+    [SerializeField] private GameObject lobbyPanel;
+    [SerializeField] private GameObject roomPanel;
+    [SerializeField] private TextMeshProUGUI roomName;
+    [SerializeField] private TextMeshProUGUI errorText;
+    [SerializeField] private LobbyCreateButton createButtonText;
 
     public RoomItem roomItemPrefab;
     List<RoomItem> roomItemsList = new List<RoomItem>();
@@ -53,6 +54,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (roomInputField.text.Length >= 1)
         {
+            createButtonText.ButtonText = "Creating...";
             PhotonNetwork.CreateRoom(roomInputField.text, new RoomOptions() { MaxPlayers = 2, BroadcastPropsChangeToAll = true });
         }
         else
