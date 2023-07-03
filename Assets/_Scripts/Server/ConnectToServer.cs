@@ -9,6 +9,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField _usernameInput;
     [SerializeField] private TextMeshProUGUI buttonText;
     [SerializeField] private TextMeshProUGUI errorText;
+    [SerializeField] private UnityEngine.UI.Button connectButton;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = _usernameInput.text;
             buttonText.text = "Connecting...";
+            connectButton.interactable = false;
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
         }

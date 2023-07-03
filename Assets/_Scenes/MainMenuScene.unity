@@ -4498,6 +4498,7 @@ MonoBehaviour:
   _usernameInput: {fileID: 1607294985}
   buttonText: {fileID: 462336410}
   errorText: {fileID: 185216512}
+  connectButton: {fileID: 1810333789}
 --- !u!4 &1541276423
 Transform:
   m_ObjectHideFlags: 0
