@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
             playerTextInformationComponent.Coins = p.GetCoin().ToString();
             playerTextInformationComponent.Score = p.GetScore().ToString();
-            playerTextInformationComponent.NickName = PhotonNetwork.LocalPlayer.NickName;
+            playerTextInformationComponent.NickName = p.NickName;
             playerListEntries.Add(p.ActorNumber, entry);
         }
     }
