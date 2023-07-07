@@ -116,9 +116,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (PhotonNetwork.LocalPlayer != null)
+        if (PhotonNetwork.LocalPlayer != null && view.IsMine)
         {
-            PhotonNetwork.LocalPlayer.AddCoin(collision.gameObject.GetComponent<Coin>().Coins);
+            if (collision.gameObject.tag == "CoinA" || collision.gameObject.tag == "CoinB" || collision.gameObject.tag == "CoinC")
+                PhotonNetwork.LocalPlayer.AddCoin(collision.gameObject.GetComponent<Coin>().Coins);
                     
         }
 
