@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
         view = GetComponent<PhotonView>();
         playerBoxCollider2D = GetComponent<BoxCollider2D>();
+
     }
 
     public void Start()

@@ -29,10 +29,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             GameObject entry = Instantiate(_playerOverviewEntryPrefab);
             entry.transform.SetParent(_playerOverviewEntrySpawnPosition.transform);
             entry.transform.localScale = Vector3.one;
-
-            entry.GetComponent<PlayerTextInformation>().Coins = p.GetCoin().ToString();
-            entry.GetComponent<PlayerTextInformation>().Score = p.GetScore().ToString();
-
+            var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
+            playerTextInformationComponent.Coins = p.GetCoin().ToString();
+            playerTextInformationComponent.Score = p.GetScore().ToString();
+            playerTextInformationComponent.NickName = PhotonNetwork.LocalPlayer.NickName;
             playerListEntries.Add(p.ActorNumber, entry);
         }
     }
@@ -42,8 +42,9 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         GameObject entry;
         if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
         {
-            entry.GetComponent<PlayerTextInformation>().Coins = targetPlayer.GetCoin().ToString();
-            entry.GetComponent<PlayerTextInformation>().Score = targetPlayer.GetScore().ToString();
+            var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
+            playerTextInformationComponent.Coins = targetPlayer.GetCoin().ToString();
+            playerTextInformationComponent.Score = targetPlayer.GetScore().ToString();
         }
     }
 
