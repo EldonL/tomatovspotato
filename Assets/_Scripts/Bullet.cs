@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Bullet : MonoBehaviour
 {
 
@@ -46,7 +46,13 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag=="enemy")
         {
             gameObject.SetActive(false);
-            ScoreManager.Instance.AddScore(playerType, collision.gameObject.GetComponent<EnemyBase>().Score);
+           
+            if (PhotonNetwork.LocalPlayer != null)
+            {
+
+
+                PhotonNetwork.LocalPlayer.AddScore(collision.gameObject.GetComponent<EnemyBase>().Score);
+            }
         }
 
     }

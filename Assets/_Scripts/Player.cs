@@ -116,21 +116,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag=="CoinA")
+        if (PhotonNetwork.LocalPlayer != null)
         {
-            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
+            PhotonNetwork.LocalPlayer.AddCoin(collision.gameObject.GetComponent<Coin>().Coins);
+                    
         }
-        if(collision.gameObject.tag == "CoinB")
-        {
-            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
-        }
-        if(collision.gameObject.tag =="CoinC")
-        {
-            ScoreManager.Instance.AddCoin(playerType, collision.gameObject.GetComponent<Coin>().Coins);
-        }
+
         if (collision.gameObject.tag == "enemy")
         {
-            ScoreManager.Instance.MinusLives(playerType, 1);
+            //ScoreManager.Instance.MinusLives(playerType, 1);
 
             if (view.IsMine)
             {

@@ -70,7 +70,7 @@ public class EnemyPoolInstance : MonoBehaviour
                 numberOfEnemyASpawned++;
                 if (numberOfEnemyASpawned > numberOfEnemyAToSpawn && !enemyASpawnedDone)
                 {
-                    ScoreManager.Instance.AddLevel();
+                   // ScoreManager.Instance.AddLevel();
                     enemyASpawnedDone = true;
                 }
                 return pooledObjectsA[i];

@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class TestPlayerScore : MonoBehaviour
+
+namespace TestCode
 {
-    public const string PlayerScoreProp = "score";
-}
-public static class TestScoreExtensions
+
+
+    public class TestPlayerScore : MonoBehaviour
+    {
+        public const string PlayerScoreProp = "score";
+    }
+    public static class TestScoreExtensions
     {
         public static void SetScore(this Photon.Realtime.Player player, int newScore)
         {
@@ -21,8 +26,8 @@ public static class TestScoreExtensions
             int current = player.GetScore();
             current = current + scoreToAddToCurrent;
 
-        ExitGames.Client.Photon.Hashtable score = new ExitGames.Client.Photon.Hashtable();  // using PUN's implementation of Hashtable
-        score[TestPlayerScore.PlayerScoreProp] = current;
+            ExitGames.Client.Photon.Hashtable score = new ExitGames.Client.Photon.Hashtable();  // using PUN's implementation of Hashtable
+            score[TestPlayerScore.PlayerScoreProp] = current;
 
             player.SetCustomProperties(score);  // this locally sets the score and will sync it in-game asap.
         }
@@ -38,4 +43,4 @@ public static class TestScoreExtensions
             return 0;
         }
     }
-
+}

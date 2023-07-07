@@ -11,8 +11,8 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private string quitToMainScene = "MainMenuScene";
 
-    [SerializeField] private PlayerScores player1;
-    [SerializeField] private PlayerScores player2;
+    [SerializeField] private PlayerInformation player1;
+    [SerializeField] private PlayerInformation player2;
 
     [SerializeField] private TextMeshProUGUI score1;
     [SerializeField] private TextMeshProUGUI score2;
@@ -50,10 +50,10 @@ public class GameOverMenu : MonoBehaviour
     private void NoLives()
     {
         Time.timeScale = 0.0f;
-        score1.text = player1.Score.ToString();
-        score2.text = player2.Score.ToString();
-        coin1.text = player1.Coin.ToString();
-        coin2.text = player2.Coin.ToString();
+        score1.text = "Need to replace";
+        score2.text = "Need to replace";
+        coin1.text = "Need to replace";
+        coin2.text = "Need to replace";
 
         _root.SetActive(true);
     }
