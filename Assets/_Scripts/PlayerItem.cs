@@ -17,6 +17,10 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     Photon.Realtime.Player player;
 
+    private void Start()
+    {
+        PhotonNetwork.LocalPlayer.SetScore(7);
+    }
     public void SetPlayerInfo(Photon.Realtime.Player _player)
     {
         playerName.text = _player.NickName;
