@@ -20,6 +20,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.LocalPlayer.SetScore(0);
+        PhotonNetwork.LocalPlayer.SetCoin(0);
     }
     public void SetPlayerInfo(Photon.Realtime.Player _player)
     {
