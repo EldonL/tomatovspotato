@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: {fileID: 4823107351509226866}
+  lives: {fileID: 4823107353090972865}
   coins: {fileID: 4823107353372472046}
   score: {fileID: 4823107351815642974}
 --- !u!1 &4823107351342881927

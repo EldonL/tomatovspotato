@@ -19,6 +19,9 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        ExitGames.Client.Photon.Hashtable initialProps =
+            new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_LIVES, TomatoGame.PLAYER_MAX_LIVES } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(initialProps);
         PhotonNetwork.LocalPlayer.SetScore(0);
         PhotonNetwork.LocalPlayer.SetCoin(0);
     }

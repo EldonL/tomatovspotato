@@ -145,6 +145,11 @@ public class Player : MonoBehaviour
 
     IEnumerator HitByEnemyRoutine(Photon.Realtime.Player player)
     {
+        object lives;
+        if (player.CustomProperties.TryGetValue(TomatoGame.PLAYER_LIVES, out lives))
+        {
+            player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { TomatoGame.PLAYER_LIVES, ((int)lives <= 1) ? 0 : ((int)lives - 1) } });
+        }
         //GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
         //explosion.transform.position = transform.position;
         //explosion.transform.position = transform.position;

@@ -33,6 +33,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Coins = p.GetCoin().ToString();
             playerTextInformationComponent.Score = p.GetScore().ToString();
             playerTextInformationComponent.NickName = p.NickName;
+            playerTextInformationComponent.Lives = TomatoGame.PLAYER_MAX_LIVES.ToString();
             playerListEntries.Add(p.ActorNumber, entry);
         }
     }
@@ -45,6 +46,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
             playerTextInformationComponent.Coins = targetPlayer.GetCoin().ToString();
             playerTextInformationComponent.Score = targetPlayer.GetScore().ToString();
+            playerTextInformationComponent.Lives = targetPlayer.CustomProperties[TomatoGame.PLAYER_LIVES].ToString();
         }
     }
 
