@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         {
             PlayerMovement();
             _timer += Time.deltaTime;
-            if (_timer > _timerToReloadBullet)
+            if (_timer > _timerToReloadBullet && _root.activeInHierarchy)
             {
                 view.RPC("Shoot", RpcTarget.AllViaServer, transform.position, transform.rotation);
                 _timer = 0.0f;
