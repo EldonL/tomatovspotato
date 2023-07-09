@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
 
     PhotonView view;
     Photon.Realtime.Player player;
-    public GameObject BulletPrefab;
+    [SerializeField] private GameObject BulletPrefab;
+    [SerializeField] private GameObject explosionPrefab;
     private void Awake()
     {
         originalPosition = gameObject.transform.position;
@@ -97,7 +98,6 @@ public class Player : MonoBehaviour
          float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
             GameObject bullet;
 
-            /** Use this if you want to fire one bullet at a time **/
             bullet = Instantiate(BulletPrefab, position, Quaternion.identity) as GameObject;
         bullet.GetComponent<Bullet>().InitializeBullet(view.Owner);
     }
@@ -148,10 +148,9 @@ public class Player : MonoBehaviour
         {
             player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { TomatoGame.PLAYER_LIVES, ((int)lives <= 1) ? 0 : ((int)lives - 1) } });
         }
-        //GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
-        //explosion.transform.position = transform.position;
-        //explosion.transform.position = transform.position;
-        //explosion.SetActive(true);
+
+        GameObject explosion;
+        explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
         _root.SetActive(false);
         playerBoxCollider2D.enabled = false;
         yield return new WaitForSeconds(0.75f);

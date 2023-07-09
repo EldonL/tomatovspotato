@@ -5,7 +5,7 @@ using DG.Tweening;
 public class EnemySpawn : MonoBehaviour
 {
     private float _timer = 0.0f;
-    [SerializeField] private float _timerToReloadBullet = 0.2f;
+    [SerializeField] private float _timerToReloadBullet = 3f;
 
     [SerializeField] private EnemyPoolInstance.enemyType enemyType;
     // Start is called before the first frame update

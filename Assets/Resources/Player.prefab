@@ -144,6 +144,7 @@ MonoBehaviour:
   arm: {fileID: 1531460324632282516}
   hat: {fileID: 5945521195925423532}
   BulletPrefab: {fileID: 9117897539097445932, guid: 5fffb446bab0d6e4ab42a36796faa144, type: 3}
+  explosionPrefab: {fileID: 8533332096699873326, guid: 4a0ef18d50706a64e918cc0ddb371f3d, type: 3}
 --- !u!61 &5945521194276924485
 BoxCollider2D:
   m_ObjectHideFlags: 0

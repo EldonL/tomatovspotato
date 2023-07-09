@@ -35,10 +35,10 @@ public abstract class EnemyBase : MonoBehaviour
 
             if(currentLife <= 0)
             {
-                GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
-                explosion.transform.position = transform.position;
-                explosion.transform.position = transform.position;
-                explosion.SetActive(true);
+              //  GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
+                //explosion.transform.position = transform.position;
+                //explosion.transform.position = transform.position;
+                //explosion.SetActive(true);
                 gameObject.SetActive(false);
                 currentLife = defaultLife;
             }

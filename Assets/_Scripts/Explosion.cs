@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public WaitForSeconds timeToStayEnabled = new WaitForSeconds(1.0f);
-    private void OnEnable()
+    private float timeBeforeDestroy = 1.0f;
+
+    private void Start()
     {
-        StartCoroutine(EnabledObject());
+        Destroy(gameObject, timeBeforeDestroy);
     }
 
-    private IEnumerator EnabledObject()
-    {
-        if (gameObject.activeInHierarchy)
-        {
-            yield return timeToStayEnabled;
-            gameObject.SetActive(false);
-        }
-        else
-            yield break;
-    }
 }
