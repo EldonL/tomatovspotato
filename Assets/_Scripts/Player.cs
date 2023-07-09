@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 
             /** Use this if you want to fire one bullet at a time **/
             bullet = Instantiate(BulletPrefab, position, Quaternion.identity) as GameObject;
+        bullet.GetComponent<Bullet>().InitializeBullet(view.Owner);
     }
 
 

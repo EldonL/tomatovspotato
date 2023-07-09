@@ -31,20 +31,17 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
-   
+    public void InitializeBullet(Photon.Realtime.Player owner)
+    {
+        Owner = owner;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag=="enemy")
         {
             Destroy(gameObject);
-
-            if (PhotonNetwork.LocalPlayer != null)
-            {
-
-
-                PhotonNetwork.LocalPlayer.AddScore(collision.gameObject.GetComponent<EnemyBase>().Score);
-            }
+            Owner.AddScore(collision.gameObject.GetComponent<EnemyBase>().Score);
         }
 
     }
