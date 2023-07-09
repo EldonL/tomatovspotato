@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     PhotonView view;
     Photon.Realtime.Player player;
-
+    public GameObject BulletPrefab;
     private void Awake()
     {
         originalPosition = gameObject.transform.position;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
             _timer += Time.deltaTime;
             if (_timer > _timerToReloadBullet)
             {
-                Shoot();
+                view.RPC("Shoot", RpcTarget.AllViaServer, transform.position, transform.rotation);
                 _timer = 0.0f;
             }
 
@@ -91,17 +91,14 @@ public class Player : MonoBehaviour
 
 
 
-
-    public void Shoot()
+    [PunRPC]
+    public void Shoot(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
     {
-        Bullet bullet = PlayerBulletPoolInstance.Instance.GetPooledObject();
-        if(bullet != null && _root.activeInHierarchy)
-        {
-            bullet.playerType = playerType;
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
-            bullet.gameObject.SetActive(true);
-        }
+         float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
+            GameObject bullet;
+
+            /** Use this if you want to fire one bullet at a time **/
+            bullet = Instantiate(BulletPrefab, position, Quaternion.identity) as GameObject;
     }
 
 

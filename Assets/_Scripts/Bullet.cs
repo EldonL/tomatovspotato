@@ -6,17 +6,18 @@ public class Bullet : MonoBehaviour
 {
 
     private float speed = 10.0f;
-    public WaitForSeconds timeToStayEnabled = new WaitForSeconds(1.3f);
-    public GameManager.PlayerType playerType;
-    public SpriteRenderer spriteRenderer;
+    private float timeBeforeDestroy = 2.0f;
 
+    public SpriteRenderer spriteRenderer;
+    public Photon.Realtime.Player Owner { get; private set; }
     private void Awake()
     {
         WhatYouHaveMenu.OnSelectClicked += WhatYouHaveMenuSelectClick;
     }
-    private void OnEnable()
+
+    private void Start()
     {
-        StartCoroutine(EnabledBullet());
+        Destroy(gameObject, timeBeforeDestroy);
     }
 
     private void OnDestroy()
@@ -30,23 +31,14 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
-    private IEnumerator EnabledBullet()
-    {
-        if (gameObject.activeInHierarchy)
-        {
-            yield return timeToStayEnabled;
-            gameObject.SetActive(false);
-        }
-        else
-            yield break;
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag=="enemy")
         {
-            gameObject.SetActive(false);
-           
+            Destroy(gameObject);
+
             if (PhotonNetwork.LocalPlayer != null)
             {
 
@@ -56,6 +48,8 @@ public class Bullet : MonoBehaviour
         }
 
     }
+
+
 
     private void WhatYouHaveMenuSelectClick()
     {
