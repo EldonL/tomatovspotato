@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Photon.Pun;
 public class EnemySpawn : MonoBehaviour
 {
     private float _timer = 0.0f;
@@ -20,12 +21,16 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > _timerToReloadBullet)
+        if(PhotonNetwork.IsMasterClient)
         {
-            EnemySelection();
-            _timer = 0.0f;
+            _timer += Time.deltaTime;
+            if (_timer > _timerToReloadBullet)
+            {
+                EnemySelection();
+                _timer = 0.0f;
+            }
         }
+
 
 
     }

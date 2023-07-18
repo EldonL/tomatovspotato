@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class EnemyPoolInstance : MonoBehaviour
 {
     public static EnemyPoolInstance Instance;
@@ -35,30 +35,35 @@ public class EnemyPoolInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pooledObjectsA = new List<GameObject>();
-        pooledObjectsB = new List<GameObject>();
-        pooledObjectsC = new List<GameObject>();
-        GameObject tmpA;
-        GameObject tmpB;
-        GameObject tmpC;
-        for (int i = 0; i < _amountToPool; i++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            tmpA = Instantiate(_objectToPoolA);
-            tmpA.gameObject.SetActive(false);
-            pooledObjectsA.Add(tmpA);
+            pooledObjectsA = new List<GameObject>();
+            pooledObjectsB = new List<GameObject>();
+            pooledObjectsC = new List<GameObject>();
+            GameObject tmpA;
+            GameObject tmpB;
+            GameObject tmpC;
+            for (int i = 0; i < _amountToPool; i++)
+            {
+                tmpA = PhotonNetwork.Instantiate(_objectToPoolA.name, transform.position, transform.rotation);
+                tmpA.gameObject.SetActive(false);
+                pooledObjectsA.Add(tmpA);
+            }
+            for (int i = 0; i < _amountToPool; i++)
+            {
+                tmpB = Instantiate(_objectToPoolB);
+                tmpB.gameObject.SetActive(false);
+                pooledObjectsB.Add(tmpB);
+            }
+            for (int i = 0; i < _amountToPool; i++)
+            {
+                tmpC = Instantiate(_objectToPoolC);
+                tmpC.gameObject.SetActive(false);
+                pooledObjectsC.Add(tmpC);
+            }
+
         }
-        for (int i = 0; i < _amountToPool; i++)
-        {
-            tmpB = Instantiate(_objectToPoolB);
-            tmpB.gameObject.SetActive(false);
-            pooledObjectsB.Add(tmpB);
-        }
-        for (int i = 0; i < _amountToPool; i++)
-        {
-            tmpC = Instantiate(_objectToPoolC);
-            tmpC.gameObject.SetActive(false);
-            pooledObjectsC.Add(tmpC);
-        }
+           
     }
 
     public GameObject GetPooledObjectA()

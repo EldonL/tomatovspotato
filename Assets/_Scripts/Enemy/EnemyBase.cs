@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public abstract class EnemyBase : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public abstract class EnemyBase : MonoBehaviour
     public WaitForSeconds timeToStayEnabled = new WaitForSeconds(3.0f);
     [SerializeField] private int defaultLife = 1;
     private int currentLife;
-
+    [SerializeField] private GameObject explosionPrefab;
+    PhotonView view;
     protected virtual void Awake()
     {
         currentLife = defaultLife;
+        view = GetComponent<PhotonView>();
     }
 
     protected virtual void OnEnable()
@@ -35,17 +38,27 @@ public abstract class EnemyBase : MonoBehaviour
 
             if(currentLife <= 0)
             {
-              //  GameObject explosion = ExplosionPoolInstance.Instance.GetPooledObjectA();
-                //explosion.transform.position = transform.position;
-                //explosion.transform.position = transform.position;
+                if (view.IsMine && collision.gameObject.GetComponent<Bullet>().Owner == PhotonNetwork.LocalPlayer)
+                {
+                    view.RPC("EnemyDestroyed", RpcTarget.All);
+                }
+
                 //explosion.SetActive(true);
-                gameObject.SetActive(false);
+              //  gameObject.SetActive(false);
                 currentLife = defaultLife;
             }
 
             CollideWithPlayer();
         }
     }
+
+    [PunRPC]
+    protected virtual void EnemyDestroyed()
+    {
+        GameObject explosion;
+        explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+    }
+
 
     protected abstract void CollideWithPlayer();
 
