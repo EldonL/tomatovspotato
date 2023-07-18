@@ -38,13 +38,13 @@ public abstract class EnemyBase : MonoBehaviour
 
             if(currentLife <= 0)
             {
-                if (view.IsMine && collision.gameObject.GetComponent<Bullet>().Owner == PhotonNetwork.LocalPlayer)
+                if (view.IsMine)
                 {
                     view.RPC("EnemyDestroyed", RpcTarget.All);
                 }
 
                 //explosion.SetActive(true);
-              //  gameObject.SetActive(false);
+                gameObject.SetActive(false);
                 currentLife = defaultLife;
             }
 
