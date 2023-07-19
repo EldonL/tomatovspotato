@@ -12,7 +12,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private int defaultLife = 1;
     private int currentLife;
     [SerializeField] private GameObject explosionPrefab;
-    PhotonView view;
+    protected PhotonView view;
     protected virtual void Awake()
     {
         currentLife = defaultLife;
@@ -45,10 +45,12 @@ public abstract class EnemyBase : MonoBehaviour
                 if (view.IsMine)
                 {
                     view.RPC("EnemyDestroyed", RpcTarget.All);
+                    PhotonNetwork.Destroy(gameObject);
                 }
-
-                //explosion.SetActive(true);
-                gameObject.SetActive(false);
+                else
+                {
+                    gameObject.SetActive(false);
+                }
                 currentLife = defaultLife;
             }
 

@@ -11,12 +11,14 @@ public class Enemy : EnemyBase
 
     protected override IEnumerator EnabledEnemy()
     {
-        if (gameObject.activeInHierarchy)
+        if (!view.IsMine)
+            yield break;
+        else
         {
             yield return timeToStayEnabled;
-            gameObject.SetActive(false);
+            PhotonNetwork.Destroy(gameObject);
+
         }
-        else
-            yield break;
+        yield break;
     }
 }
