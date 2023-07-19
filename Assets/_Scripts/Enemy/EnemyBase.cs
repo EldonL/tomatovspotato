@@ -27,7 +27,11 @@ public abstract class EnemyBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
+
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
