@@ -2,27 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 public class EnemyPoolInstance : MonoBehaviour
 {
     public static EnemyPoolInstance Instance;
 
-    public List<GameObject> pooledObjectsA;
-    public List<GameObject> pooledObjectsB;
-    public List<GameObject> pooledObjectsC;
-    [SerializeField] private GameObject _objectToPoolA;
-    [SerializeField] private GameObject _objectToPoolB;
-    [SerializeField] private GameObject _objectToPoolC;
-    private int _amountToPool = 40;
-
-    private int numberOfEnemyASpawned;
-    private int numberOfEnemyAToSpawn =5;
-    private bool enemyASpawnedDone = false;
-    public enum enemyType
-    {
-        enemyA,
-        enemyB,
-        enemyC
-    }
+    [SerializeField] private Transform startLocationA;
+    [SerializeField] private Transform startLocationB;
+    [SerializeField] private GameObject smallPotatoEnemy;
 
     private void Awake()
     {
@@ -37,76 +24,27 @@ public class EnemyPoolInstance : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            pooledObjectsA = new List<GameObject>();
-            pooledObjectsB = new List<GameObject>();
-            pooledObjectsC = new List<GameObject>();
-            GameObject tmpA;
-            GameObject tmpB;
-            GameObject tmpC;
-            for (int i = 0; i < _amountToPool; i++)
-            {
-                tmpA = PhotonNetwork.Instantiate(_objectToPoolA.name, transform.position, transform.rotation);
-                tmpA.gameObject.SetActive(false);
-                pooledObjectsA.Add(tmpA);
-            }
-            for (int i = 0; i < _amountToPool; i++)
-            {
-                tmpB = Instantiate(_objectToPoolB);
-                tmpB.gameObject.SetActive(false);
-                pooledObjectsB.Add(tmpB);
-            }
-            for (int i = 0; i < _amountToPool; i++)
-            {
-                tmpC = Instantiate(_objectToPoolC);
-                tmpC.gameObject.SetActive(false);
-                pooledObjectsC.Add(tmpC);
-            }
+            StartCoroutine(SpawnSmallPotatoEnemy());           
 
-        }
-           
+        }           
     }
 
-    public GameObject GetPooledObjectA()
+    private IEnumerator SpawnSmallPotatoEnemy()
     {
-        for (int i = 0; i < _amountToPool; i++)
+        while(true)
         {
-            if (!pooledObjectsA[i].gameObject.activeInHierarchy)
-            {
-                numberOfEnemyASpawned++;
-                if (numberOfEnemyASpawned > numberOfEnemyAToSpawn && !enemyASpawnedDone)
-                {
-                   // ScoreManager.Instance.AddLevel();
-                    enemyASpawnedDone = true;
-                }
-                return pooledObjectsA[i];
-            }
+            yield return new WaitForSeconds(Random.Range(TomatoGame.POTATO_ENEMY_MIN_SPAWN_TIME, TomatoGame.POTATO_ENEMY_MAX_SPAWN_TIME));
+            var x = Random.Range(startLocationA.position.x, startLocationB.position.x);
+            var y = startLocationA.position.y;
+            var z = startLocationA.position.z;
+            Vector3 spawnPosition = new Vector3(x, y, z);
+            PhotonNetwork.Instantiate(smallPotatoEnemy.name, spawnPosition, startLocationA.rotation);
         }
-        return null;
     }
 
-    public GameObject GetPooledObjectB()
-    {
-        for (int i = 0; i < _amountToPool; i++)
-        {
-            if (!pooledObjectsB[i].gameObject.activeInHierarchy)
-            {
-                return pooledObjectsB[i];
-            }
-        }
-        return null;
-    }
+  
 
-    public GameObject GetPooledObjectC()
-    {
-        for (int i = 0; i < _amountToPool; i++)
-        {
-            if (!pooledObjectsC[i].gameObject.activeInHierarchy)
-            {
-                return pooledObjectsC[i];
-            }
-        }
-        return null;
-    }
+  
 
     private void OnDestroy()
     {

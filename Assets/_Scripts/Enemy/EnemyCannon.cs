@@ -21,10 +21,10 @@ public class EnemyCannon : EnemyBase
         yield return shootBombSeconds;
         while (true)
         {
-            GameObject enemy = EnemyPoolInstance.Instance.GetPooledObjectA();
-            enemy.transform.position = bombTransform.position;
-            enemy.transform.rotation = bombTransform.rotation;
-            enemy.gameObject.SetActive(true);
+           // GameObject enemy = EnemyPoolInstance.Instance.GetPooledObjectA();
+            //enemy.transform.position = bombTransform.position;
+            //enemy.transform.rotation = bombTransform.rotation;
+            //enemy.gameObject.SetActive(true);
             yield return shootBombSeconds;
         }
 
