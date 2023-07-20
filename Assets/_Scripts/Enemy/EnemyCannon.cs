@@ -8,6 +8,8 @@ public class EnemyCannon : EnemyBase
     public WaitForSeconds shootBombSeconds = new WaitForSeconds(2.0f);
     [SerializeField] private Transform endPoint;
     [SerializeField] private bool allowMoveAtStart = false;
+
+    
     protected override void CollideWithPlayer()
     {
 
@@ -16,17 +18,25 @@ public class EnemyCannon : EnemyBase
 
     protected override IEnumerator EnabledEnemy()
     {
-        if(allowMoveAtStart)
-            transform.DOMoveY(endPoint.position.y, 1f);
-        yield return shootBombSeconds;
-        while (true)
+        if (!view.IsMine)
         {
-           // GameObject enemy = EnemyPoolInstance.Instance.GetPooledObjectA();
-            //enemy.transform.position = bombTransform.position;
-            //enemy.transform.rotation = bombTransform.rotation;
-            //enemy.gameObject.SetActive(true);
-            yield return shootBombSeconds;
+            yield break;
         }
+        else
+        {
+            if (allowMoveAtStart)
+                transform.DOMoveY(endPoint.position.y, 1f);
+            yield return shootBombSeconds;
+            while (true)
+            {
+                // GameObject enemy = EnemyPoolInstance.Instance.GetPooledObjectA();
+                //enemy.transform.position = bombTransform.position;
+                //enemy.transform.rotation = bombTransform.rotation;
+                //enemy.gameObject.SetActive(true);
+                yield return shootBombSeconds;
+            }
+        }
+
 
     }
 }
