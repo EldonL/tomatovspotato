@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Photon.Pun;
+
 public class EnemyCannon : EnemyBase
 {
     [SerializeField] private Transform bombTransform;
     public WaitForSeconds shootBombSeconds = new WaitForSeconds(2.0f);
     [SerializeField] private Transform endPoint;
     [SerializeField] private bool allowMoveAtStart = false;
+    [SerializeField] private GameObject smallPotatoEnemy;
 
-    
     protected override void CollideWithPlayer()
     {
 
@@ -24,15 +26,13 @@ public class EnemyCannon : EnemyBase
         }
         else
         {
-            if (allowMoveAtStart)
+            if (allowMoveAtStart)              
                 transform.DOMoveY(endPoint.position.y, 1f);
             yield return shootBombSeconds;
             while (true)
             {
-                // GameObject enemy = EnemyPoolInstance.Instance.GetPooledObjectA();
-                //enemy.transform.position = bombTransform.position;
-                //enemy.transform.rotation = bombTransform.rotation;
-                //enemy.gameObject.SetActive(true);
+                PhotonNetwork.Instantiate(smallPotatoEnemy.name, bombTransform.position, bombTransform.rotation);
+
                 yield return shootBombSeconds;
             }
         }
