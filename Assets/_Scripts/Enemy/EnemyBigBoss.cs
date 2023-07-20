@@ -13,7 +13,15 @@ public class EnemyBigBoss : EnemyBase
 
     protected override IEnumerator EnabledEnemy()
     {
-        transform.DOMoveY(endPoint.position.y, 2f);
-        yield break;
+        if (!view.IsMine)
+        {
+            yield break;
+        }
+        else
+        {
+            transform.DOMoveY(endPoint.position.y, 1f);
+            yield break;
+        }
+
     }
 }
