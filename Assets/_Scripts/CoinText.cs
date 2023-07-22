@@ -20,12 +20,7 @@ public class CoinText : MonoBehaviour
 
     private IEnumerator EnabledCoin()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            yield return timeToStayEnabled;
-            gameObject.SetActive(false);
-        }
-        else
-            yield break;
+ 
+        yield break;
     }
 }

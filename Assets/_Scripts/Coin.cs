@@ -30,16 +30,13 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag=="Player")
         {
-
-
-            //spawn coin number
-            gameObject.SetActive(false);
             if (view.IsMine)
             {
-                PhotonNetwork.Destroy(gameObject);
-                coinText.transform.position = transform.position;
-                coinText.transform.rotation = transform.rotation;
                 coinText.GetComponent<CoinText>().Text = coins.ToString();
+                Instantiate(coinText, transform.position, transform.rotation);
+
+                PhotonNetwork.Destroy(gameObject);
+
             }
             else
             {
