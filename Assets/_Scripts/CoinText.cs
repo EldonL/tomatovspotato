@@ -4,13 +4,15 @@ using UnityEngine;
 using TMPro;
 public class CoinText : MonoBehaviour
 {
-    public WaitForSeconds timeToStayEnabled = new WaitForSeconds(1.0f);
+
     private float _speed = 1.0f;
     public string Text { get => text.text; set => text.text = value; }
     [SerializeField] private TextMeshProUGUI text;
-    private void OnEnable()
+    private float timeBeforeDestroy = 1.0f;
+
+    private void Start()
     {
-        StartCoroutine(EnabledCoin());
+        Destroy(gameObject, timeBeforeDestroy);
     }
 
     private void Update()
@@ -18,9 +20,5 @@ public class CoinText : MonoBehaviour
         transform.Translate(Vector3.up * _speed * Time.deltaTime);
     }
 
-    private IEnumerator EnabledCoin()
-    {
- 
-        yield break;
-    }
+
 }

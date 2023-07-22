@@ -14,7 +14,8 @@ public class CoinPoolInstance : MonoBehaviour
     [SerializeField] private GameObject coinB;
     [SerializeField] private GameObject coinC;
 
-    [SerializeField] private GameObject coinTextSpawnAboveOtherUI;
+    public Transform CoinTextSpawnAboveOtherUI { get => coinTextSpawnAboveOtherUI; }
+    [SerializeField] private Transform coinTextSpawnAboveOtherUI;
 
     private void Awake()
     {

@@ -227,7 +227,7 @@ MonoBehaviour:
   coinA: {fileID: 4917721763224031336, guid: aba218c9d72629847854c8f7ff11c554, type: 3}
   coinB: {fileID: 3159167143370164226, guid: 0753fa72785dc824696034a54a4ae502, type: 3}
   coinC: {fileID: 6446036908641409529, guid: a67e2377b88a8b24bba8a744a673107c, type: 3}
-  coinTextSpawnAboveOtherUI: {fileID: 342576591}
+  coinTextSpawnAboveOtherUI: {fileID: 342576592}
 --- !u!114 &98040068
 MonoBehaviour:
   m_ObjectHideFlags: 0

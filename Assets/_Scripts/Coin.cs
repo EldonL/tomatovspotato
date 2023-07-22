@@ -30,19 +30,27 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag=="Player")
         {
+           
             if (view.IsMine)
             {
-                coinText.GetComponent<CoinText>().Text = coins.ToString();
-                Instantiate(coinText, transform.position, transform.rotation);
-
+                view.RPC("CoinCollected", RpcTarget.All);
                 PhotonNetwork.Destroy(gameObject);
-
             }
             else
             {
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    [PunRPC]
+    private void CoinCollected()
+    {
+        coinText.GetComponent<CoinText>().Text = coins.ToString();
+
+        GameObject coinTextGameObject;
+        coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
+        coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
     }
 
     private IEnumerator EnabledObject()
