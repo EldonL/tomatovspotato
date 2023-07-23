@@ -34,11 +34,8 @@ public class Coin : MonoBehaviour
             if (view.IsMine)
             {
                 view.RPC("CoinCollected", RpcTarget.All);
+                collision.gameObject.GetComponent<PhotonView>().RPC("CollectCoin", RpcTarget.All, Coins);
                 PhotonNetwork.Destroy(gameObject);
-            }
-            else
-            {
-                gameObject.SetActive(false);
             }
         }
     }
