@@ -33,11 +33,18 @@ public class Coin : MonoBehaviour
             if (PhotonNetwork.LocalPlayer==collision.gameObject.GetComponent<Player>().PhotonPlayer)
                 collision.gameObject.GetComponent<PhotonView>().RPC("CollectCoin", RpcTarget.All, Coins);
 
-            if (view.IsMine)
-            {               
+            if (view.IsMine && PhotonNetwork.LocalPlayer != collision.gameObject.GetComponent<Player>().PhotonPlayer)//if on master but is client that collides with coin.
+            {
+                foreach(var childSprite in gameObject.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    childSprite.enabled = false;
+                }
+            }
+            else if (view.IsMine)//on master only
+            {
                 PhotonNetwork.Destroy(gameObject);
             }
-            else
+            else //on client only
             {
                 gameObject.SetActive(false);
             }
