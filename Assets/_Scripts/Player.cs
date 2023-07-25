@@ -130,13 +130,12 @@ public class Player : MonoBehaviour
     [PunRPC]
     public void CollectCoin(int numCoins)
     {
-        if(view.IsMine)
-        {
-            Debug.Log("view is mien?");
-            coinText.GetComponent<CoinText>().Text = numCoins.ToString();
-            GameObject coinTextGameObject;
-            coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
-            coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
+        coinText.GetComponent<CoinText>().Text = numCoins.ToString();
+        GameObject coinTextGameObject;
+        coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
+        coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
+        if (view.IsMine)
+        {            
             PhotonNetwork.LocalPlayer.AddCoin(numCoins);
         }
 
