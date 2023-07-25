@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerBoxCollider2D;
 
     private Vector3 originalPosition;
-
+    [SerializeField] private GameObject coinText;
     PhotonView view;
+    public Photon.Realtime.Player PhotonPlayer { get => player; }
     Photon.Realtime.Player player;
     [SerializeField] private GameObject BulletPrefab;
     [SerializeField] private GameObject explosionPrefab;
@@ -131,6 +132,11 @@ public class Player : MonoBehaviour
     {
         if(view.IsMine)
         {
+            Debug.Log("view is mien?");
+            coinText.GetComponent<CoinText>().Text = numCoins.ToString();
+            GameObject coinTextGameObject;
+            coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
+            coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
             PhotonNetwork.LocalPlayer.AddCoin(numCoins);
         }
 

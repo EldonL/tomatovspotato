@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     public WaitForSeconds timeToStayEnabled = new WaitForSeconds(3.0f);
     private float speed = 5.0f;
     protected PhotonView view;
-    [SerializeField] private GameObject coinText;
+
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -30,25 +30,21 @@ public class Coin : MonoBehaviour
     {
         if(collision.gameObject.tag=="Player")
         {
-           
-            if (view.IsMine)
-            {
-                view.RPC("CoinCollected", RpcTarget.All);
+            if (PhotonNetwork.LocalPlayer==collision.gameObject.GetComponent<Player>().PhotonPlayer)
                 collision.gameObject.GetComponent<PhotonView>().RPC("CollectCoin", RpcTarget.All, Coins);
+
+            if (view.IsMine)
+            {               
                 PhotonNetwork.Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
             }
         }
     }
 
-    [PunRPC]
-    private void CoinCollected()
-    {
-        coinText.GetComponent<CoinText>().Text = coins.ToString();
 
-        GameObject coinTextGameObject;
-        coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
-        coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
-    }
 
     private IEnumerator EnabledObject()
     {
