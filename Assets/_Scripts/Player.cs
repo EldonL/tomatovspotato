@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 public class Player : MonoBehaviour
 {
 
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour
     Photon.Realtime.Player player;
     [SerializeField] private GameObject BulletPrefab;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private UnityEngine.UI.Image selfIdentifierImage;
+    [SerializeField] private TextMeshProUGUI selfIdentifierText;
     private void Awake()
     {
         originalPosition = gameObject.transform.position;
@@ -39,6 +42,23 @@ public class Player : MonoBehaviour
     public void Start()
     {
         _camera = Camera.main;
+        if(view.IsMine)
+        {
+            selfIdentifierImage.gameObject.SetActive(true);
+            selfIdentifierText.gameObject.SetActive(false);
+        }
+        else
+        {
+            foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
+            {
+                if(!p.IsLocal)
+                {
+                    selfIdentifierText.text = p.NickName;
+                }
+            }
+            selfIdentifierImage.gameObject.SetActive(false);
+            selfIdentifierText.gameObject.SetActive(true);
+        }
     }
 
     public void Update()
