@@ -147,6 +147,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    int coins = 0;
     [PunRPC]
     public void CollectCoin(int numCoins)
     {
@@ -155,8 +156,11 @@ public class Player : MonoBehaviour
         coinTextGameObject = Instantiate(coinText, transform.position, transform.rotation) as GameObject;
         coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
         if (view.IsMine)
-        {            
-            PhotonNetwork.LocalPlayer.AddCoin(numCoins);
+        {
+        coins += numCoins;
+            //ScoreManager.Instance.AddCoinToPlayer(PhotonNetwork.LocalPlayer, coins);
+            //    PhotonNetwork.LocalPlayer.AddCoin(numCoins);
+            PhotonNetwork.LocalPlayer.SetCoin(coins);
         }
 
     }

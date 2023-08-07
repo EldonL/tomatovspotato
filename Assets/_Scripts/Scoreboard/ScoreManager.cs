@@ -20,8 +20,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public delegate void ScoreManagerLevelIncreaseAction();
     public static event ScoreManagerLevelIncreaseAction LevelIncreaseEvent;
 
+    public static ScoreManager Instance;
     public void Awake()
     {
+        Instance = this;
         playerListEntries = new Dictionary<int, GameObject>();
 
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
@@ -36,6 +38,22 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Lives = TomatoGame.PLAYER_MAX_LIVES.ToString();
             playerListEntries.Add(p.ActorNumber, entry);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    public void AddCoinToPlayer(Photon.Realtime.Player targetPlayer, int coins)
+    {
+        //GameObject entry;
+        //if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
+        //{
+        //    var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
+        //    playerTextInformationComponent.Coins = coins.ToString();
+
+        //}
     }
 
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
@@ -107,7 +125,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     //            player2.Lives -= lives;
     //            break;
     //    }
-        
+
     //    // need to do a check if one player game
     //    if(player1.Lives<=0)
     //    {
