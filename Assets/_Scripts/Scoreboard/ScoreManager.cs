@@ -20,10 +20,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public delegate void ScoreManagerLevelIncreaseAction();
     public static event ScoreManagerLevelIncreaseAction LevelIncreaseEvent;
 
-    public static ScoreManager Instance;
     public void Awake()
     {
-        Instance = this;
         playerListEntries = new Dictionary<int, GameObject>();
 
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
@@ -40,22 +38,6 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
-    public void AddCoinToPlayer(Photon.Realtime.Player targetPlayer, int coins)
-    {
-        //GameObject entry;
-        //if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry))
-        //{
-        //    var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
-        //    playerTextInformationComponent.Coins = coins.ToString();
-
-        //}
-    }
-
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         GameObject entry;
@@ -68,74 +50,5 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         }
     }
 
-    //public void AddLevel()
-    //{
-    //    levelInt += 1;
-    //    levelText.text = levelInt.ToString();
-    //    LevelIncreaseEvent?.Invoke();
-    //}
-
-    //public void AddCoin(GameManager.PlayerType playerType, int coins)
-    //{
-    //    switch(playerType)
-    //    {
-    //        case GameManager.PlayerType.p1:
-    //            player1.Coin += coins;
-    //            break;
-    //        case GameManager.PlayerType.p2:
-    //            player2.Coin += coins;
-    //            break;
-    //    }
-    //}
-
-    //public void AddScore(GameManager.PlayerType playerType, int scores)
-    //{
-    //    switch (playerType)
-    //    {
-    //        case GameManager.PlayerType.p1:
-    //            player1.Score += scores;
-    //            break;
-    //        case GameManager.PlayerType.p2:
-    //            player2.Score += scores;
-    //            break;
-    //    }
-    //}
-
-    //public void AddLives(GameManager.PlayerType playerType, int lives)
-    //{
-    //    switch (playerType)
-    //    {
-    //        case GameManager.PlayerType.p1:
-    //            player1.Lives += lives;
-    //            break;
-    //        case GameManager.PlayerType.p2:
-    //            player2.Lives += lives;
-    //            break;
-    //    }
-    //}
-
-    //public void MinusLives(GameManager.PlayerType playerType, int lives)
-    //{
-    //    switch (playerType)
-    //    {
-    //        case GameManager.PlayerType.p1:
-    //            player1.Lives -= lives;
-    //            break;
-    //        case GameManager.PlayerType.p2:
-    //            player2.Lives -= lives;
-    //            break;
-    //    }
-
-    //    // need to do a check if one player game
-    //    if(player1.Lives<=0)
-    //    {
-    //        NoLivesEvent?.Invoke();
-    //    }
-    //    // need to do a  check if two player game
-    //    if (player1.Lives<=0 && player2.Lives<=0)
-    //    {
-    //        NoLivesEvent?.Invoke();
-    //    }
-    //}
 
 }

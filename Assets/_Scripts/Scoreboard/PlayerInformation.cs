@@ -37,16 +37,21 @@ public static class PlayerScoresExtensions
         player.SetCustomProperties(score);  // this locally sets the score and will sync it in-game asap.
     }
     
-    public static void AddCoin(this Photon.Realtime.Player player, int coinToAddToCurrent)
-    {
-        int current = player.GetCoin();
-        current = current + coinToAddToCurrent;
+    /// <summary>
+    /// This function currently doesn't work if getting 2+ coin due to GetCoin() not updating instantly
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    //public static void AddCoin(this Photon.Realtime.Player player, int coinToAddToCurrent)
+    //{
+    //    int current = player.GetCoin();
+    //    current = current + coinToAddToCurrent;
 
-        ExitGames.Client.Photon.Hashtable coin = new ExitGames.Client.Photon.Hashtable();  // using PUN's implementation of Hashtable
-        coin[PlayerInformation.PlayerCoinProp] = current;
+    //    ExitGames.Client.Photon.Hashtable coin = new ExitGames.Client.Photon.Hashtable();  // using PUN's implementation of Hashtable
+    //    coin[PlayerInformation.PlayerCoinProp] = current;
 
-        player.SetCustomProperties(coin);  // this locally sets the coin and will sync it in-game asap.
-    }
+    //    player.SetCustomProperties(coin);  // this locally sets the coin and will sync it in-game asap.
+    //}
 
     public static int GetScore(this Photon.Realtime.Player player)
     {

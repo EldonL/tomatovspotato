@@ -157,9 +157,7 @@ public class Player : MonoBehaviour
         coinTextGameObject.transform.parent = CoinPoolInstance.Instance.CoinTextSpawnAboveOtherUI;
         if (view.IsMine)
         {
-        coins += numCoins;
-            //ScoreManager.Instance.AddCoinToPlayer(PhotonNetwork.LocalPlayer, coins);
-            //    PhotonNetwork.LocalPlayer.AddCoin(numCoins);
+            coins += numCoins;
             PhotonNetwork.LocalPlayer.SetCoin(coins);
         }
 
