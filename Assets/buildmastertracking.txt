@@ -3,3 +3,11 @@
 TOM-38 add in version number in login, lobby, room and game scene so we know what version the user is using from game point of view
 823f2edb155241795dfe07fe4cc4cd038e07f7a5
 tvp0.0.1.0.28.apk 26499KB
+============================
+2023-08-07
+0.0.2.0.29
+TOM-49 resolve collecting 2+coins causing amount to not be displayed properly by calling SetCoin instead of GetCoin
+change PlayerTextinformation on scoreboard to black to the text is easier to read
+change version number text to black so it is easier to read
+3d95b0245adcc2b07e8ce5f0a85cc34982dbf05c
+tvp0.0.2.0.29.apk 26499KB
