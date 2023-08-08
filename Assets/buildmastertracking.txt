@@ -11,3 +11,9 @@ change PlayerTextinformation on scoreboard to black to the text is easier to rea
 change version number text to black so it is easier to read
 3d95b0245adcc2b07e8ce5f0a85cc34982dbf05c
 tvp0.0.2.0.29.apk 26499KB
+============================
+2023-08-08
+0.0.3.0.30
+TOM-47 add enemy life point text above the enemy so users know how many damage they need to apply to the enemy
+bf93ab762d01e9a3e3d4605f934895027ad51c0d 
+tvp0.0.3.0.30.apk 26523KB
