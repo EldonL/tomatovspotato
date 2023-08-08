@@ -16,9 +16,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected PhotonView view;
     [SerializeField] TextMeshProUGUI lifePointtext;
     [SerializeField] Slider lifePointSlider;
-    private SpriteRenderer spriteRenderer;
-    private Color defaultColor;
-    private Color damagedColor = new Color(0, 0, 0);
     WaitForSeconds enemyHitAffectWaitTime = new WaitForSeconds(3.0f);
 
     protected virtual void Awake()
@@ -27,8 +24,6 @@ public abstract class EnemyBase : MonoBehaviour
         lifePointtext.text = $"{currentLife}HP";
         lifePointSlider.value = (float)currentLife / (float)defaultLife;
         view = GetComponent<PhotonView>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        defaultColor = spriteRenderer.color;
         lifePointtext.gameObject.SetActive(false);
         lifePointSlider.gameObject.SetActive(false);
     }
