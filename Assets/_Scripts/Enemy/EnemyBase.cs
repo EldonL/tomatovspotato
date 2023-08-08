@@ -15,12 +15,22 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     protected PhotonView view;
     [SerializeField] TextMeshProUGUI lifePointtext;
+    [SerializeField] Slider lifePointSlider;
+    private SpriteRenderer spriteRenderer;
+    private Color defaultColor;
+    private Color damagedColor = new Color(0, 0, 0);
+    WaitForSeconds enemyHitAffectWaitTime = new WaitForSeconds(3.0f);
 
     protected virtual void Awake()
     {
         currentLife = defaultLife;
         lifePointtext.text = $"{currentLife}HP";
+        lifePointSlider.value = (float)currentLife / (float)defaultLife;
         view = GetComponent<PhotonView>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultColor = spriteRenderer.color;
+        lifePointtext.gameObject.SetActive(false);
+        lifePointSlider.gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable()
@@ -43,7 +53,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (collision.gameObject.tag == "PlayerBullet")
         {
             currentLife -= 1;
-            lifePointtext.text = $"{currentLife}HP";
+
             if (currentLife <= 0)
             {
                 if (view.IsMine)
@@ -57,8 +67,15 @@ public abstract class EnemyBase : MonoBehaviour
                 }
                 currentLife = defaultLife;
             }
-
+            else
+            {
+                lifePointtext.text = $"{currentLife}HP";
+                lifePointSlider.value = (float)currentLife / (float)defaultLife;
+                StartCoroutine(EnemyHitRoutine());
+            }
             CollideWithPlayer();
+
+
         }
     }
 
@@ -73,4 +90,17 @@ public abstract class EnemyBase : MonoBehaviour
     protected abstract void CollideWithPlayer();
 
     protected abstract IEnumerator EnabledEnemy();
+
+    protected virtual IEnumerator EnemyHitRoutine()
+    {
+        if (lifePointSlider.gameObject.activeInHierarchy)
+            yield break;
+        lifePointtext.gameObject.SetActive(true);
+        lifePointSlider.gameObject.SetActive(true);
+
+        yield return enemyHitAffectWaitTime;
+        lifePointtext.gameObject.SetActive(false);
+        lifePointSlider.gameObject.SetActive(false);
+        yield break;
+    }
 }
