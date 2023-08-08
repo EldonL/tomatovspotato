@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using TMPro;
+using UnityEngine.UI;
 public abstract class EnemyBase : MonoBehaviour
 {
     public int Score { get => score; }
@@ -13,9 +14,12 @@ public abstract class EnemyBase : MonoBehaviour
     private int currentLife;
     [SerializeField] private GameObject explosionPrefab;
     protected PhotonView view;
+    [SerializeField] TextMeshProUGUI lifePointtext;
+
     protected virtual void Awake()
     {
         currentLife = defaultLife;
+        lifePointtext.text = $"{currentLife}HP";
         view = GetComponent<PhotonView>();
     }
 
@@ -39,8 +43,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (collision.gameObject.tag == "PlayerBullet")
         {
             currentLife -= 1;
-
-            if(currentLife <= 0)
+            lifePointtext.text = $"{currentLife}HP";
+            if (currentLife <= 0)
             {
                 if (view.IsMine)
                 {
