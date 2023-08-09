@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 public abstract class EnemyBase : MonoBehaviour
 {
-    public int Score { get => score; }
+
     [SerializeField]private float speed = 3.0f;
     [SerializeField] private int score = 100;
     public WaitForSeconds timeToStayEnabled = new WaitForSeconds(3.0f);
@@ -17,6 +17,22 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] TextMeshProUGUI lifePointtext;
     [SerializeField] Slider lifePointSlider;
     WaitForSeconds enemyHitAffectWaitTime = new WaitForSeconds(3.0f);
+
+    public int Score 
+    {
+        get 
+        {
+            if(currentLife<=1)
+            {
+                return score;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+       
+    }
 
     protected virtual void Awake()
     {
