@@ -17,3 +17,9 @@ tvp0.0.2.0.29.apk 26499KB
 TOM-47 add enemy life point text above the enemy so users know how many damage they need to apply to the enemy
 bf93ab762d01e9a3e3d4605f934895027ad51c0d 
 tvp0.0.3.0.30.apk 26523KB
+============================
+2023-08-09
+0.0.4.0.31
+TOM-26 only allow the score to be added when player destroys the enemy NOT when the player hits the enemy with the bullet by adjusting when the property returns score
+6bb6ced025aa787b620fcdb5db606be1df88d555
+tvp0.0.4.0.31.apk 26523KB
