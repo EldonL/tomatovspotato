@@ -19,11 +19,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public delegate void ScoreManagerLevelIncreaseAction();
     public static event ScoreManagerLevelIncreaseAction LevelIncreaseEvent;
-
+    protected PhotonView view;
     public void Awake()
     {
         playerListEntries = new Dictionary<int, GameObject>();
-
+        view = GetComponent<PhotonView>();
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
         {
             GameObject entry = Instantiate(_playerOverviewEntryPrefab);
@@ -49,6 +49,28 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Lives = targetPlayer.CustomProperties[TomatoGame.PLAYER_LIVES].ToString();
         }
     }
+
+
+    public void AddLevel()
+    { 
+        view.RPC("AddLevelRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void AddLevelRPC()
+    {
+        levelInt += 1;
+        levelText.text = levelInt.ToString();
+        LevelIncreaseEvent?.Invoke();
+    }
+
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        AddLevel();
+    //    }
+    //}
 
 
 }
