@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void AddLevelRPC()
+    private void AddLevelRPC()
     {
         levelInt += 1;
         levelText.text = levelInt.ToString();
@@ -66,7 +66,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     //private void Update()
     //{
-    //    if(Input.GetKeyDown(KeyCode.A))
+    //    if (Input.GetKeyDown(KeyCode.A))
     //    {
     //        AddLevel();
     //    }
