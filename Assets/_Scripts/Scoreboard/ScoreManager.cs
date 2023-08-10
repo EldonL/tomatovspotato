@@ -53,7 +53,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public void AddLevel()
     { 
-        view.RPC("AddLevelRPC", RpcTarget.All);
+        if(PhotonNetwork.IsMasterClient)
+            view.RPC("AddLevelRPC", RpcTarget.All);
     }
 
     [PunRPC]
@@ -64,13 +65,13 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         LevelIncreaseEvent?.Invoke();
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.A))
-    //    {
-    //        AddLevel();
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AddLevel();
+        }
+    }
 
 
 }

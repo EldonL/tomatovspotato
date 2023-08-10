@@ -26,11 +26,12 @@ public class BackgroundPoolInstance : MonoBehaviour
 
     private void BackGroundToUse()
     {
-
-        if (spriteRenderer.Count < spriteIndex)
+        spriteIndex++;
+        if (spriteRenderer.Count <= spriteIndex)
+        {
             spriteIndex = 0;
-        else
-            spriteIndex++;
+        }
+
         foreach (var bg in background)
         {
             bg.spriteRenderer.sprite = spriteRenderer[spriteIndex];
