@@ -65,13 +65,13 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         LevelIncreaseEvent?.Invoke();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            AddLevel();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        AddLevel();
+    //    }
+    //}
 
 
 }
