@@ -29,4 +29,10 @@ tvp0.0.4.0.31.apk 26523KB
 TOM-34 check if spriteindex is greater then sprite array count after the spriteindex is increased to avoid array out of index error
 TOM-34 sync up background image change and increase level text by having an AddLevel() that calls a RPC function AddLevelRPC
 3250ca4ecec2a52cc6e16566853dd5d1715bec47
-tvp0.0.5.0.32.apk 26523KB
+tvp0.0.5.0.31.apk 26523KB
+============================
+2023-08-11
+0.0.6.0.33
+TOM-45 allow level 1 increase to level 2 to occur when 5 potato enemies are destroyed. Allow level2 increase to level 3 when all cannon enemies are destroyed. Allow level 3 increase to level 4 when big boss is destroyed 
+47781047051d917a1e169461b13723551cf7ad75
+tvp0.0.6.0.33.apk 26531KB
