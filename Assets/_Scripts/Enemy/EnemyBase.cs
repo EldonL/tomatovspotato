@@ -69,7 +69,7 @@ public abstract class EnemyBase : MonoBehaviour
             {
                 if (view.IsMine)
                 {
-                    view.RPC("EnemyDestroyed", RpcTarget.All);
+                    EnemyDestroyed();
                     PhotonNetwork.Destroy(gameObject);
                 }
                 else
@@ -90,8 +90,13 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    [PunRPC]
     protected virtual void EnemyDestroyed()
+    {
+        view.RPC("EnemyDestroyedRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    protected virtual void EnemyDestroyedRPC()
     {
         GameObject explosion;
         explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;

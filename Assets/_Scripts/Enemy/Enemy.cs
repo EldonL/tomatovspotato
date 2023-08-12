@@ -4,6 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 public class Enemy : EnemyBase
 {
+    protected override void EnemyDestroyed()
+    {
+        base.EnemyDestroyed();
+        ScoreManager.Instance.PotatoEnemyDestroyed = 1;
+    }
     protected override void CollideWithPlayer()
     {
         //nothing

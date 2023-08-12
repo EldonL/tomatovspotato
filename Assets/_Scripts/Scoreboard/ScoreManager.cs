@@ -5,6 +5,7 @@ using TMPro;
 using Photon.Pun;
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
+    public static ScoreManager Instance;
     [SerializeField] private GameObject _playerOverviewEntryPrefab;
     [SerializeField] private GameObject _playerOverviewEntrySpawnPosition;
 
@@ -12,7 +13,21 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private TextMeshProUGUI levelText;
     public int LevelInt { get => levelInt; private set => levelInt = value; }
-    private int levelInt;
+    private int levelInt =1;
+
+    public int PotatoEnemyDestroyed 
+    { 
+        get => potatoEnemyDestroyed;
+        set
+        {
+            potatoEnemyDestroyed += value;
+            if(potatoEnemyDestroyed==5)
+            {
+                AddLevel();
+            }
+        } 
+    }
+    private int potatoEnemyDestroyed;
 
     public delegate void ScoreManagerAction();
     public static event ScoreManagerAction NoLivesEvent;
@@ -22,6 +37,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     protected PhotonView view;
     public void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
         playerListEntries = new Dictionary<int, GameObject>();
         view = GetComponent<PhotonView>();
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
@@ -36,6 +56,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Lives = TomatoGame.PLAYER_MAX_LIVES.ToString();
             playerListEntries.Add(p.ActorNumber, entry);
         }
+    }
+
+    public void OnDestroy()
+    {
+        Instance = null;
     }
 
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
