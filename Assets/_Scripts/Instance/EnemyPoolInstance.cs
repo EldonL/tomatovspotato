@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-public class EnemyPoolInstance : MonoBehaviour
+public class EnemyPoolInstance : MonoBehaviourPunCallbacks
 {
     public static EnemyPoolInstance Instance;
 
@@ -28,6 +28,10 @@ public class EnemyPoolInstance : MonoBehaviour
 
         }           
     }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 
     private IEnumerator SpawnSmallPotatoEnemy()
     {
@@ -42,12 +46,13 @@ public class EnemyPoolInstance : MonoBehaviour
         }
     }
 
-  
-
-  
-
-    private void OnDestroy()
+    #region PUNCALLBACKS
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
-        Instance = null;
+        if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+        {
+            StartCoroutine(SpawnSmallPotatoEnemy());
+        }
     }
+    #endregion
 }

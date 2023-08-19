@@ -83,7 +83,6 @@ public class CoinPoolInstance : MonoBehaviourPunCallbacks
     #region PUNCALLBACKS
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
-        Debug.Log($"onmasterclientswitched entered- localplayeractornumber:{PhotonNetwork.LocalPlayer.ActorNumber} and newmasterclient.actornumber {newMasterClient.ActorNumber}");
         if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
         {
             StartCoroutine(SpawnCoinA());
