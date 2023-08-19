@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPoolInstance : MonoBehaviour
+public class CoinPoolInstance : MonoBehaviourPunCallbacks
 {
 
     public static CoinPoolInstance Instance;
@@ -80,7 +80,18 @@ public class CoinPoolInstance : MonoBehaviour
         }
     }
 
-
+    #region PUNCALLBACKS
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        Debug.Log($"onmasterclientswitched entered- localplayeractornumber:{PhotonNetwork.LocalPlayer.ActorNumber} and newmasterclient.actornumber {newMasterClient.ActorNumber}");
+        if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+        {
+            StartCoroutine(SpawnCoinA());
+            StartCoroutine(SpawnCoinB());
+            StartCoroutine(SpawnCoinC());
+        }
+    }
+    #endregion
 
 
 }
