@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.UI;
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviourPunCallbacks
 {
 
     [SerializeField]private float speed = 3.0f;
@@ -44,9 +44,14 @@ public abstract class EnemyBase : MonoBehaviour
         lifePointSlider.gameObject.SetActive(false);
     }
 
-    protected virtual void OnEnable()
+    public override void OnEnable()
     {
-        StartCoroutine(EnabledEnemy());
+        base.OnEnable();
+        if(view.IsMine)
+        {
+            StartCoroutine(EnabledEnemy());
+        }
+
     }
 
     // Update is called once per frame
@@ -119,4 +124,14 @@ public abstract class EnemyBase : MonoBehaviour
         lifePointSlider.gameObject.SetActive(false);
         yield break;
     }
+
+    #region PUNCALLBACKS
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+        {
+            StartCoroutine(EnabledEnemy());
+        }
+    }
+    #endregion
 }

@@ -11,17 +11,19 @@ public class EnemyBigBoss : EnemyBase
         //nothing yet
     }
 
-    protected override IEnumerator EnabledEnemy()
+    public override void OnEnable()
     {
-        if (!view.IsMine)
-        {
-            yield break;
-        }
-        else
+        base.OnEnable();
+        if(view.IsMine)
         {
             transform.DOMoveY(endPoint.position.y, 1f);
-            yield break;
         }
+
+    }
+
+    protected override IEnumerator EnabledEnemy()
+    {
+        yield break;
 
     }
 }

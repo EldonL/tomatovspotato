@@ -18,6 +18,16 @@ public class EnemyCannon : EnemyBase
         //nothing yet
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if(view.IsMine)
+        {
+            if (allowMoveAtStart)
+                transform.DOMoveY(endPoint.position.y, 1f);
+        }
+    }
+
     protected override IEnumerator EnabledEnemy()
     {
         if (!view.IsMine)
@@ -26,8 +36,6 @@ public class EnemyCannon : EnemyBase
         }
         else
         {
-            if (allowMoveAtStart)              
-                transform.DOMoveY(endPoint.position.y, 1f);
             yield return shootBombSeconds;
             while (true)
             {
