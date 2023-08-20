@@ -39,7 +39,7 @@ public class EnemyCannon : EnemyBase
             yield return shootBombSeconds;
             while (true)
             {
-                PhotonNetwork.Instantiate(smallPotatoEnemy.name, bombTransform.position, bombTransform.rotation);
+                PhotonNetwork.InstantiateRoomObject(smallPotatoEnemy.name, bombTransform.position, bombTransform.rotation);
 
                 yield return shootBombSeconds;
             }

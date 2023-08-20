@@ -50,7 +50,7 @@ public class CoinPoolInstance : MonoBehaviourPunCallbacks
             var y = startLocationA.position.y;
             var z = startLocationA.position.z;
             Vector3 spawnPosition = new Vector3(x, y, z);
-            PhotonNetwork.Instantiate(coinA.name, spawnPosition, startLocationA.rotation);
+            PhotonNetwork.InstantiateRoomObject(coinA.name, spawnPosition, startLocationA.rotation);
         }
     }
     
@@ -63,7 +63,7 @@ public class CoinPoolInstance : MonoBehaviourPunCallbacks
             var y = startLocationA.position.y;
             var z = startLocationA.position.z;
             Vector3 spawnPosition = new Vector3(x, y, z);
-            PhotonNetwork.Instantiate(coinB.name, spawnPosition, startLocationA.rotation);
+            PhotonNetwork.InstantiateRoomObject(coinB.name, spawnPosition, startLocationA.rotation);
         }
     }
     
@@ -76,7 +76,7 @@ public class CoinPoolInstance : MonoBehaviourPunCallbacks
             var y = startLocationA.position.y;
             var z = startLocationA.position.z;
             Vector3 spawnPosition = new Vector3(x, y, z);
-            PhotonNetwork.Instantiate(coinC.name, spawnPosition, startLocationA.rotation);
+            PhotonNetwork.InstantiateRoomObject(coinC.name, spawnPosition, startLocationA.rotation);
         }
     }
 

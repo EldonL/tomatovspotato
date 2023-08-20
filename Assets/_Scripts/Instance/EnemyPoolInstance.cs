@@ -42,7 +42,7 @@ public class EnemyPoolInstance : MonoBehaviourPunCallbacks
             var y = startLocationA.position.y;
             var z = startLocationA.position.z;
             Vector3 spawnPosition = new Vector3(x, y, z);
-            PhotonNetwork.Instantiate(smallPotatoEnemy.name, spawnPosition, startLocationA.rotation);
+            PhotonNetwork.InstantiateRoomObject(smallPotatoEnemy.name, spawnPosition, startLocationA.rotation);
         }
     }
 
