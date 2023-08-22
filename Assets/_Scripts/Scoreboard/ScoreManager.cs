@@ -41,7 +41,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             Instance = this;
         else
             Destroy(gameObject);
-
+        levelText.text = levelInt.ToString();
         playerListEntries = new Dictionary<int, GameObject>();
         view = GetComponent<PhotonView>();
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
