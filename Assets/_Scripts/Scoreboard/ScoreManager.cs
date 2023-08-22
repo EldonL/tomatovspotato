@@ -20,8 +20,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         get => potatoEnemyDestroyed;
         set
         {
-            potatoEnemyDestroyed += value;
-            if(potatoEnemyDestroyed==5)
+            potatoEnemyDestroyed = value;
+            if (potatoEnemyDestroyed == 5)
             {
                 AddLevel();
             }
@@ -73,6 +73,12 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Score = targetPlayer.GetScore().ToString();
             playerTextInformationComponent.Lives = targetPlayer.CustomProperties[TomatoGame.PLAYER_LIVES].ToString();
         }
+    }
+
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        base.OnRoomPropertiesUpdate(propertiesThatChanged);
+        PotatoEnemyDestroyed = PlayerSharedInformationExtensions.GetPotatoEnemyDestroyed();
     }
 
 
