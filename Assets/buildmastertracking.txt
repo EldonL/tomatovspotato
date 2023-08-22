@@ -36,3 +36,9 @@ tvp0.0.5.0.31.apk 26523KB
 TOM-45 allow level 1 increase to level 2 to occur when 5 potato enemies are destroyed. Allow level2 increase to level 3 when all cannon enemies are destroyed. Allow level 3 increase to level 4 when big boss is destroyed 
 47781047051d917a1e169461b13723551cf7ad75
 tvp0.0.6.0.33.apk 26531KB
+============================
+2023-08-21
+0.0.7.0.34
+TOM-48 allow number of enemies destroyed to be sent over the network using CustomProperties so that the total of number enemies destroyed is tracked over the network and the level increases at the correct time
+477aeb3e6783c6f1e6cc5d67f846743da43a3b93
+tvp0.0.6.0.33.apk 26531KB
