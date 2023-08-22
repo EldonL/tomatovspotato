@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private Camera _camera;
     private float _timer = 0.0f;
     private float _timerToReloadBullet = 0.2f;
-    [SerializeField] private GameManager.PlayerType playerType;
+
     [SerializeField] private GameObject _root;
 
     [SerializeField] public Sprite[] bodySprites;

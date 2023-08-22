@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GameManager : MonoBehaviour
+using Photon.Pun;
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Instance;
-
-    public enum PlayerType
-    {
-        p1,
-        p2
-    }
+    private string mainMenuScene = "MainMenuScene";
 
     private void Awake()
     {
-        if (Instance = null)
+        if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
@@ -24,4 +19,31 @@ public class GameManager : MonoBehaviour
     {
         Instance = null;
     }
+
+    #region PUN CALLBACKS
+
+    public override void OnDisconnected(Photon.Realtime.DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(mainMenuScene);
+    }
+
+    public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+    }
+
+
+    #endregion
+
 }

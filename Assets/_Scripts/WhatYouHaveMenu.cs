@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Photon.Pun;
 public class WhatYouHaveMenu : MonoBehaviour
 {
     public static WhatYouHaveMenu Instance;
@@ -87,7 +88,7 @@ public class WhatYouHaveMenu : MonoBehaviour
     private void OnQuitClick()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(quitToMainScene);
+        PhotonNetwork.Disconnect();
     }
 
     private void OnStoreClick()

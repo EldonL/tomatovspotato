@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 98040066}
   - component: {fileID: 98040067}
   - component: {fileID: 98040068}
+  - component: {fileID: 98040069}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -243,6 +244,18 @@ MonoBehaviour:
   startLocationA: {fileID: 1942855461}
   startLocationB: {fileID: 1895325406}
   smallPotatoEnemy: {fileID: 860948653600105086, guid: 2f29fb179940e0a4eb9e6da369ba0ba3, type: 3}
+--- !u!114 &98040069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98040064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b929d33d268847c40a29c568b80d9dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258500875
 GameObject:
   m_ObjectHideFlags: 0
