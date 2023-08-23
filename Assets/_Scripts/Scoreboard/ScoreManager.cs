@@ -73,6 +73,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             playerTextInformationComponent.Score = targetPlayer.GetScore().ToString();
             playerTextInformationComponent.Lives = targetPlayer.CustomProperties[TomatoGame.PLAYER_LIVES].ToString();
         }
+        if(changedProps.ContainsKey(TomatoGame.PLAYER_LIVES))
+        {
+            CheckEndOfGame();
+        }
     }
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
@@ -96,6 +100,34 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         LevelIncreaseEvent?.Invoke();
     }
 
+
+    private void CheckEndOfGame()
+    {
+        bool allDestroyed = true;
+
+        foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
+        {
+            object lives;
+            if (p.CustomProperties.TryGetValue(TomatoGame.PLAYER_LIVES, out lives))
+            {
+                if ((int)lives > 0)
+                {
+                    allDestroyed = false;
+                    break;
+                }
+            }
+        }
+
+        if (allDestroyed)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                StopAllCoroutines();
+            }
+
+            NoLivesEvent.Invoke();
+        }
+    }
     //private void Update()
     //{
     //    if (Input.GetKeyDown(KeyCode.A))
