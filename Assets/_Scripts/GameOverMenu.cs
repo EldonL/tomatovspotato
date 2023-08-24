@@ -46,8 +46,8 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 0.0f;
         foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
         {
-            GameObject entry = Instantiate(playerOverviewEntryPrefab);
-            entry.transform.SetParent(playerOverviewSpawnPosition);
+            GameObject entry = Instantiate(playerOverviewEntryPrefab, playerOverviewSpawnPosition);
+            //entry.transform.SetParent(playerOverviewSpawnPosition);
             var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
             playerTextInformationComponent.Coins = p.GetCoin().ToString();
             playerTextInformationComponent.Score = p.GetScore().ToString();
