@@ -4,21 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Photon.Pun;
 public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _root;
     [SerializeField] private Button _quitButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private string quitToMainScene = "MainMenuScene";
-
-    [SerializeField] private PlayerInformation player1;
-    [SerializeField] private PlayerInformation player2;
-
-    [SerializeField] private TextMeshProUGUI score1;
-    [SerializeField] private TextMeshProUGUI score2;
-    [SerializeField] private TextMeshProUGUI coin1;
-    [SerializeField] private TextMeshProUGUI coin2;
-
+    [SerializeField] private Transform playerOverviewSpawnPosition;
+    [SerializeField] private GameObject playerOverviewEntryPrefab;
 
     private void Awake()
     {
@@ -50,10 +44,16 @@ public class GameOverMenu : MonoBehaviour
     private void NoLives()
     {
         Time.timeScale = 0.0f;
-        score1.text = "Need to replace";
-        score2.text = "Need to replace";
-        coin1.text = "Need to replace";
-        coin2.text = "Need to replace";
+        foreach (Photon.Realtime.Player p in PhotonNetwork.PlayerList)
+        {
+            GameObject entry = Instantiate(playerOverviewEntryPrefab);
+            entry.transform.SetParent(playerOverviewSpawnPosition);
+            var playerTextInformationComponent = entry.GetComponent<PlayerTextInformation>();
+            playerTextInformationComponent.Coins = p.GetCoin().ToString();
+            playerTextInformationComponent.Score = p.GetScore().ToString();
+            playerTextInformationComponent.NickName = p.NickName;
+            //playerTextInformationComponent.Lives = TomatoGame.PLAYER_MAX_LIVES.ToString();
+        }
 
         _root.SetActive(true);
     }
