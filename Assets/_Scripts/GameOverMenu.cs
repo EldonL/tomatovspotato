@@ -9,7 +9,6 @@ public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _root;
     [SerializeField] private Button _quitButton;
-    [SerializeField] private Button _restartButton;
     [SerializeField] private string quitToMainScene = "MainMenuScene";
     [SerializeField] private Transform playerOverviewSpawnPosition;
     [SerializeField] private GameObject playerOverviewEntryPrefab;
@@ -17,7 +16,6 @@ public class GameOverMenu : MonoBehaviour
     private void Awake()
     {
         _quitButton.onClick.AddListener(QuitButtonClick);
-        _restartButton.onClick.AddListener(RestartButtonClick);
         _root.SetActive(false);
         ScoreManager.NoLivesEvent += NoLives;
     }
@@ -25,20 +23,13 @@ public class GameOverMenu : MonoBehaviour
     private void OnDestroy()
     {
         _quitButton.onClick.RemoveAllListeners();
-        _restartButton.onClick.RemoveAllListeners();
         ScoreManager.NoLivesEvent -= NoLives;
     }
 
     private void QuitButtonClick()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(quitToMainScene);
-    }
-
-    private void RestartButtonClick()
-    {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PhotonNetwork.Disconnect();
     }
 
     private void NoLives()
