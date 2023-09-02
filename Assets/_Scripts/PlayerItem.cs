@@ -10,6 +10,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject leftArrowButton;
     [SerializeField] private GameObject rightArrowButton;
+    [SerializeField] private UnityEngine.UI.Button playerReadyButton;
+    [SerializeField] private TextMeshProUGUI playerReadyText;
 
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
     public UnityEngine.UI.Image playerAvatar;
@@ -24,6 +26,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.SetCustomProperties(initialProps);
         PhotonNetwork.LocalPlayer.SetScore(0);
         PhotonNetwork.LocalPlayer.SetCoin(0);
+  
     }
     public void SetPlayerInfo(Photon.Realtime.Player _player)
     {
@@ -36,6 +39,9 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     {
         leftArrowButton.SetActive(true);
         rightArrowButton.SetActive(true);
+        playerReadyButton.gameObject.SetActive(true);
+        playerReadyText.text = "Ready?";
+        
     }
 
     public void OnClickLeftArrow()
