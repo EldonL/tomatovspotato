@@ -12,6 +12,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject rightArrowButton;
     [SerializeField] private UnityEngine.UI.Button playerReadyButton;
     [SerializeField] private TextMeshProUGUI playerReadyText;
+    private bool isPlayerReady;
+    private int actorNumber;
 
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
     public UnityEngine.UI.Image playerAvatar;
@@ -21,28 +23,32 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        ExitGames.Client.Photon.Hashtable initialProps =
-            new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_LIVES, TomatoGame.PLAYER_MAX_LIVES } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(initialProps);
-        PhotonNetwork.LocalPlayer.SetScore(0);
-        PhotonNetwork.LocalPlayer.SetCoin(0);
-  
+        if(PhotonNetwork.LocalPlayer.ActorNumber != actorNumber)
+        {
+            leftArrowButton.SetActive(false);
+            rightArrowButton.SetActive(false);
+            playerReadyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            ExitGames.Client.Photon.Hashtable initialProps =
+    new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_READY, isPlayerReady }, { TomatoGame.PLAYER_LIVES, TomatoGame.PLAYER_MAX_LIVES } };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(initialProps);
+            PhotonNetwork.LocalPlayer.SetScore(0);
+            PhotonNetwork.LocalPlayer.SetCoin(0);
+            playerReadyText.text = "Ready?";
+        }
+
+        
     }
     public void SetPlayerInfo(Photon.Realtime.Player _player)
     {
         playerName.text = _player.NickName;
         player = _player;
+        actorNumber = _player.ActorNumber;
         UpdatePlayerItem(player);
     }
 
-    public void ApplyLocalChanges()
-    {
-        leftArrowButton.SetActive(true);
-        rightArrowButton.SetActive(true);
-        playerReadyButton.gameObject.SetActive(true);
-        playerReadyText.text = "Ready?";
-        
-    }
 
     public void OnClickLeftArrow()
     {
