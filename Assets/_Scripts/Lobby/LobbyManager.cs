@@ -166,6 +166,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         playButton.SetActive(CheckPlayersReady());
     }
 
+
     private bool CheckPlayersReady()
     {
         if(!PhotonNetwork.IsMasterClient)
@@ -178,9 +179,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             object isPlayerReady;
             if(p.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isPlayerReady))
             {
+                Debug.Log($"CheckPlayerReady:{(bool)isPlayerReady}");
                 if(!(bool) isPlayerReady)
                 {
-                    Debug.Log("!(bool) isPlayerReady: " + isPlayerReady);
                     return false;
                 }
             }
@@ -190,7 +191,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 return false;
             }
         }
-        Debug.Log("true");
         return true;
     }
 }

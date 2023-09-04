@@ -101,8 +101,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         object isThePlayerReady;
         if (player.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isThePlayerReady))
         {
+            Debug.Log($"UpdatePlayerItem: {(bool)isThePlayerReady}");
             SetPlayerReady((bool)isThePlayerReady);
-            Debug.Log("hi");
         }
 
     }
@@ -114,7 +114,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_READY, isPlayerReady }};
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-
+        Debug.Log($"OnreadyButtonClicked: {isPlayerReady}");
         if(PhotonNetwork.IsMasterClient)
         {
             FindObjectOfType<LobbyManager>().LocalPlayerPropertiesUpdated();
@@ -124,6 +124,5 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public void SetPlayerReady(bool playerReady)
     {
         playerReadyText.text = playerReady ? "Let's play!" : "Ready?";
-
     }
 }
