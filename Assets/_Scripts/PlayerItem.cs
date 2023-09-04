@@ -12,6 +12,9 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject rightArrowButton;
     [SerializeField] private UnityEngine.UI.Button playerReadyButton;
     [SerializeField] private TextMeshProUGUI playerReadyText;
+    [SerializeField] private UnityEngine.UI.Image playerReadyImage;
+    [SerializeField] private Sprite playerReadySprite;
+    [SerializeField] private Sprite playerNotReadySprite;
     private bool isPlayerReady;
     public int ActorNumber { get => actorNumber; private set => actorNumber = value; }
     private int actorNumber;
@@ -118,5 +121,6 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public void SetPlayerReady(bool playerReady)
     {
         playerReadyText.text = playerReady ? "Let's play!" : "Ready?";
+        playerReadyImage.sprite = playerReady ? playerReadySprite : playerNotReadySprite;
     }
 }
