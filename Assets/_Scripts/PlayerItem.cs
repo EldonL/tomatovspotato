@@ -37,6 +37,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetScore(0);
             PhotonNetwork.LocalPlayer.SetCoin(0);
             playerReadyText.text = "Ready?";
+
+            playerReadyButton.onClick.AddListener(OnReadyButtonClicked);
         }
 
         
@@ -96,5 +98,25 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["playerAvatar"] = 0;
         }
+    }
+
+    private void OnReadyButtonClicked()
+    {
+        isPlayerReady = !isPlayerReady;
+        SetPlayerReady(isPlayerReady);
+
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_READY, isPlayerReady }};
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
+        if(PhotonNetwork.IsMasterClient)
+        {
+            FindObjectOfType<LobbyManager>().LocalPlayerPropertiesUpdated();
+        }
+    }
+
+    public void SetPlayerReady(bool playerReady)
+    {
+        playerReadyText.text = playerReady ? "Let's play!" : "Ready?";
+
     }
 }

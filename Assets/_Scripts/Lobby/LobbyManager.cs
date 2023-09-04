@@ -39,17 +39,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         
     }
 
-    private void Update()
-    {
-        if(PhotonNetwork.IsMasterClient)
-        {
-            playButton.SetActive(true);
-        }
-        else
-        {
-            playButton.SetActive(false);
-        }
-    }
     public void OnClickCreate()
     {
         if (roomInputField.text.Length >= 1)
@@ -72,6 +61,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomPanel.SetActive(true);
         roomName.text = "Room name: " + PhotonNetwork.CurrentRoom.Name;
         UpdatePlayerList();
+        playButton.SetActive(CheckPlayersReady());
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -150,12 +140,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerEnteredRoom(newPlayer);
         UpdatePlayerList();
+        playButton.SetActive(CheckPlayersReady());
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);
         UpdatePlayerList();
+        playButton.SetActive(CheckPlayersReady());
     }
 
     public void OnClickPlayButton()
@@ -163,5 +155,38 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel("GameScene");
+    }
+
+    public void LocalPlayerPropertiesUpdated()
+    {
+        playButton.SetActive(CheckPlayersReady());
+    }
+
+    private bool CheckPlayersReady()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+        {
+            return false;
+        }
+
+        foreach(Photon.Realtime.Player p in PhotonNetwork.PlayerList)
+        {
+            object isPlayerReady;
+            if(p.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isPlayerReady))
+            {
+                if(!(bool) isPlayerReady)
+                {
+                    Debug.Log("!(bool) isPlayerReady: " + isPlayerReady);
+                    return false;
+                }
+            }
+            else
+            {
+                Debug.Log("else");
+                return false;
+            }
+        }
+        Debug.Log("true");
+        return true;
     }
 }
