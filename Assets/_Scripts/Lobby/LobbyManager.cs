@@ -78,7 +78,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 object isPlayerReady;
                 if(changedProps.TryGetValue(TomatoGame.PLAYER_READY, out isPlayerReady))
                 {
-                    Debug.Log($"UpdatePlayerItem: {(bool)isPlayerReady}");
                     pItem.SetPlayerReady((bool)isPlayerReady);
                 }
             }
@@ -200,7 +199,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             object isPlayerReady;
             if(p.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isPlayerReady))
             {
-                Debug.Log($"CheckPlayerReady:{(bool)isPlayerReady}");
                 if(!(bool) isPlayerReady)
                 {
                     return false;
@@ -208,7 +206,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                Debug.Log("else");
                 return false;
             }
         }

@@ -109,7 +109,6 @@ public class PlayerItem : MonoBehaviourPunCallbacks
 
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { TomatoGame.PLAYER_READY, isPlayerReady }};
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        Debug.Log($"OnreadyButtonClicked: {isPlayerReady}");
         if(PhotonNetwork.IsMasterClient)
         {
             FindObjectOfType<LobbyManager>().LocalPlayerPropertiesUpdated();
