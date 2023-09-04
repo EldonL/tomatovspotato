@@ -49,3 +49,10 @@ TOM-54 allow the client to join lobby and don't have enemies and coin spawning w
 TOM-45 At the start of the game, level should say "level 1" not level #, by setting the levelText to levelInt.ToString() in Awake() since levelInt is set to 1 by default
 267edf97a29b6eaec1b33ab788041ddb0e287ddd
 tvp0.0.8.0.35.apk 26527KB
+============================
+2023-09-04
+0.0.9.0.36
+TOM-44 Sync Gameover
+TOM-41 wait for each player to click "ready" before allowing master to click "Play"
+e28a10da19f0c065100bc30fb408c581e1609691
+tvp0.0.9.0.36.apk 26563KB
