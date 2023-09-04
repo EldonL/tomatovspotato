@@ -64,6 +64,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         playButton.SetActive(CheckPlayersReady());
     }
 
+    public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+        foreach (PlayerItem pItem in playerItemsList)
+        {           
+            if ( pItem.ActorNumber!= targetPlayer.ActorNumber)
+            {
+                continue;
+            }
+            else
+            {
+                object isPlayerReady;
+                if(changedProps.TryGetValue(TomatoGame.PLAYER_READY, out isPlayerReady))
+                {
+                    Debug.Log($"UpdatePlayerItem: {(bool)isPlayerReady}");
+                    pItem.SetPlayerReady((bool)isPlayerReady);
+                }
+            }
+        }
+        playButton.SetActive(CheckPlayersReady());
+    }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
 

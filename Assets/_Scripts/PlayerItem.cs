@@ -13,6 +13,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     [SerializeField] private UnityEngine.UI.Button playerReadyButton;
     [SerializeField] private TextMeshProUGUI playerReadyText;
     private bool isPlayerReady;
+    public int ActorNumber { get => actorNumber; private set => actorNumber = value; }
     private int actorNumber;
 
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
@@ -97,12 +98,6 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         else
         {
             playerProperties["playerAvatar"] = 0;
-        }
-        object isThePlayerReady;
-        if (player.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isThePlayerReady))
-        {
-            Debug.Log($"UpdatePlayerItem: {(bool)isThePlayerReady}");
-            SetPlayerReady((bool)isThePlayerReady);
         }
 
     }
