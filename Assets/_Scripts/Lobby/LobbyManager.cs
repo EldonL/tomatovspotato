@@ -131,7 +131,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             PlayerItem newPlayerItem = Instantiate(playerItemPrefab, playerItemParent);
             newPlayerItem.SetPlayerInfo(player.Value);
-
+            object isPlayerReady;
+            if(player.Value.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY,out isPlayerReady))
+            {
+                newPlayerItem.GetComponent<PlayerItem>().SetPlayerReady((bool)isPlayerReady);
+            }
             playerItemsList.Add(newPlayerItem);
         }
     }

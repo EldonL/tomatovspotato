@@ -36,7 +36,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties(initialProps);
             PhotonNetwork.LocalPlayer.SetScore(0);
             PhotonNetwork.LocalPlayer.SetCoin(0);
-            playerReadyText.text = "Ready?";
+
 
             playerReadyButton.onClick.AddListener(OnReadyButtonClicked);
         }
