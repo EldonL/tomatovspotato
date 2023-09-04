@@ -98,6 +98,13 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["playerAvatar"] = 0;
         }
+        object isThePlayerReady;
+        if (player.CustomProperties.TryGetValue(TomatoGame.PLAYER_READY, out isThePlayerReady))
+        {
+            SetPlayerReady((bool)isThePlayerReady);
+            Debug.Log("hi");
+        }
+
     }
 
     private void OnReadyButtonClicked()
