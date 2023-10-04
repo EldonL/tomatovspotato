@@ -26,6 +26,11 @@ namespace MySQLLearning
         {
             SceneManager.LoadScene("Login");
         }
+
+        public void GoToGame()
+        {
+            SceneManager.LoadScene("Game");
+        }
     }
 
 }
