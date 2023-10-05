@@ -41,7 +41,7 @@ namespace MySQLLearning
 
 
 
-                    if (www.downloadHandler.text[0] != '0' || www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.DataProcessingError || www.result == UnityWebRequest.Result.ProtocolError)
+                    if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.DataProcessingError || www.result == UnityWebRequest.Result.ProtocolError)
                     {
                         if (++requestAttemptCount < MAX_REQUEST_ATTEMPT_COUNT)
                         {
@@ -50,16 +50,24 @@ namespace MySQLLearning
                         }
                         else
                         {
-                            Debug.Log($"www.result: {www.result} error: {www.error} www.url: {www.url}");
+                            Debug.Log($"<color=red>www.result: {www.result} error: {www.error} www.url: {www.url}</color>");
                             Debug.Log($"www.downloadHandler.text: {www.downloadHandler.text}");
                             yield break;
                         }
                     }
                     else
                     {
-                        DBManager.username = nameField.text;
-                        DBManager.score = int.Parse(www.downloadHandler.text.Split('\t')[1]);
-                        SceneManager.LoadScene("MainMenu");
+                        if(www.downloadHandler.text[0] != '0')
+                        {
+                            Debug.Log($"<color=red> user login failed with error number:{www.downloadHandler.text}</color>");
+                        }
+                        else
+                        {
+                            DBManager.username = nameField.text;
+                            DBManager.score = int.Parse(www.downloadHandler.text.Split('\t')[1]);
+                            SceneManager.LoadScene("MainMenu");
+                        }
+
                         yield break;
                     }
 
