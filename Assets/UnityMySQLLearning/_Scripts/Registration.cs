@@ -41,7 +41,7 @@ namespace MySQLLearning
                     yield return www.SendWebRequest();
 
 
-                    if (www.downloadHandler.text !="0" ||www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.DataProcessingError || www.result == UnityWebRequest.Result.ProtocolError)
+                    if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.DataProcessingError || www.result == UnityWebRequest.Result.ProtocolError)
                     {
                         if (++requestAttemptCount < MAX_REQUEST_ATTEMPT_COUNT)
                         {
@@ -57,8 +57,16 @@ namespace MySQLLearning
                     }
                     else
                     {
-                        Debug.Log("user created successfully");
-                        SceneManager.LoadScene("Login");
+                        if(www.downloadHandler.text != "0")
+                        {
+                            Debug.Log($"<color=red> user login failed with error number:{www.downloadHandler.text}</color>");
+                        }
+                        else
+                        {
+                            Debug.Log("user created successfully");
+                            SceneManager.LoadScene("Login");
+                        }
+
                         yield break;
                     }
 
