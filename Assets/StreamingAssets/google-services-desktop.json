@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "281334022036",
+    "project_id": "tomato-vs-potato",
+    "storage_bucket": "tomato-vs-potato.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281334022036:android:76e50d03ec591f528a5981",
+        "android_client_info": {
+          "package_name": "com.mashedsauce.tomatovspotato"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1kkZa5Yd0X5U0HoD7FcFsO2xiVeLUH4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
