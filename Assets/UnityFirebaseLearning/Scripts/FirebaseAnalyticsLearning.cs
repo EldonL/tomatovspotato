@@ -29,9 +29,9 @@ namespace UnityFirebaseLearning
                 }
             });
 
-            //// Log an event with no parameters.
-            //Firebase.Analytics.FirebaseAnalytics
-            //  .LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
+            // Log an event with no parameters.
+            Firebase.Analytics.FirebaseAnalytics
+              .LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
 
             // Log an event with a float parameter
             Firebase.Analytics.FirebaseAnalytics
