@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MainMenuScene.unity
     guid: 2f0c47fb17533364f9f58b0269a5bb68
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Lobby.unity
     guid: 5b0bf449da7cdd044992264043d4b4ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
@@ -23,16 +23,25 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
     guid: 98efc37d6307844488eb3e4247dde7e9
-  - enabled: 1
+  - enabled: 0
     path: Assets/UnityMySQLLearning/_Scenes/MainMenu.unity
     guid: e19baaff29677d44289e3e4b4af8192c
-  - enabled: 1
+  - enabled: 0
     path: Assets/UnityMySQLLearning/_Scenes/RegisterMenu.unity
     guid: 81cc328d590e74a4b8b9d27f00b76a3f
-  - enabled: 1
+  - enabled: 0
     path: Assets/UnityMySQLLearning/_Scenes/Login.unity
     guid: 2ea8f30a2a14fc545813ddae8ec0626a
-  - enabled: 1
+  - enabled: 0
     path: Assets/UnityMySQLLearning/_Scenes/Game.unity
     guid: 8ff3b0ba96f741f49b17a2f069530dc4
+  - enabled: 0
+    path: Assets/UnityFirebaseLearning/Scene/FirebaseLearning.unity
+    guid: 8f8bf1d70d6dabf42bb97be35c64d0d7
+  - enabled: 1
+    path: Assets/UnityFirebaseLearning/Scene/FirebaseMainMenu.unity
+    guid: d8029df8ab2a68148b5721e91873f018
+  - enabled: 1
+    path: Assets/UnityFirebaseLearning/Scene/FirebaseLevel1.unity
+    guid: ba8056fead248f442866d4ea1ca7c1ae
   m_configObjects: {}
