@@ -9,7 +9,7 @@ namespace UnityFirebaseLearning
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.L))
+            if(Input.GetKeyDown(KeyCode.L))//register user
             {
                 var auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
                 auth.CreateUserWithEmailAndPasswordAsync("deyicel893@vasteron.com", "12345678").ContinueWith(task => {
@@ -31,7 +31,32 @@ namespace UnityFirebaseLearning
                 });
             }
 
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                var auth = Firebase.Auth.FirebaseAuth.DefaultInstance; 
+                auth.SignInWithEmailAndPasswordAsync("deyicel893@vasteron.com", "12345678").ContinueWith(task => {
+                    if (task.IsCanceled)
+                    {
+                        Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                        return;
+                    }
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                        return;
+                    }
+
+                    Firebase.Auth.AuthResult result = task.Result;
+                    Debug.LogFormat("User signed in successfully: {0} ({1})",
+                        result.User.DisplayName, result.User.UserId);
+                });
+
+            }
+
+
         }
+
+
     }
 
 }
