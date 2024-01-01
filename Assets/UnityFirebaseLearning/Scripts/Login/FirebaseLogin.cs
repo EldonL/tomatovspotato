@@ -56,17 +56,28 @@ namespace UnityFirebaseLearning
 
             if(Input.GetKeyDown(KeyCode.D))
             {
-                FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-                DocumentReference docRef = db.Collection("users").Document("alovelace");
-Dictionary<string, object> user = new Dictionary<string, object>
+                                FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+                //                DocumentReference docRef = db.Collection("users").Document("alovelace");
+                //Dictionary<string, object> user = new Dictionary<string, object>
+                //{
+                //        { "First", "Ada" },
+                //        { "Last", "Lovelace" },
+                //        { "Born", 1815 },
+                //};
+                //docRef.SetAsync(user).ContinueWithOnMainThread(task => {
+                //        Debug.Log("Added data to the alovelace document in the users collection.");
+                //});
+                DocumentReference docRef = db.Collection("users").Document("aturing");
+                Dictionary<string, object> user = new Dictionary<string, object>
 {
-        { "First", "Ada" },
-        { "Last", "Lovelace" },
-        { "Born", 1815 },
+        { "First", "Alan" },
+        { "Middle", "Mathison" },
+        { "Last", "Turing" },
+        { "Born", 1788 }
 };
-docRef.SetAsync(user).ContinueWithOnMainThread(task => {
-        Debug.Log("Added data to the alovelace document in the users collection.");
-});
+                docRef.SetAsync(user).ContinueWithOnMainThread(task => {
+                    Debug.Log("Added data to the aturing document in the users collection.");
+                });
             }
 
         }
